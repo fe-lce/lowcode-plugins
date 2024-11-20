@@ -1,5 +1,5 @@
 /* eslint-disable no-empty */
-import React, { useEffect, useState, useRef, CSSProperties } from 'react';
+import { useEffect, useState, useRef, CSSProperties, MutableRefObject } from 'react';
 import { Monaco } from '@monaco-editor/loader';
 import type { editor as oEditor } from 'monaco-editor';
 import { getMonaco } from './monaco';
@@ -324,7 +324,7 @@ export const useEditor = <T = IEditorInstance>(type: 'single' | 'diff', props: I
     }
   }, [isEditorReady, value, path, previousPath, type]);
 
-  let retEditorRef: React.MutableRefObject<T> = editorRef as any;
+  let retEditorRef: MutableRefObject<T> = editorRef as any;
   return {
     isEditorReady,
     focused,

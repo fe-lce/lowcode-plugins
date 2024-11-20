@@ -1,8 +1,8 @@
-import { workspace } from '@alilc/lowcode-engine';
+import { workspace } from '@felce/lowcode-engine';
 import {
   IPublicModelPluginContext,
   IPublicModelResource,
-} from '@alilc/lowcode-types';
+} from '@felce/lowcode-types';
 import { Search, Balloon } from '@alifd/next';
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import { FileIcon, IconArrowRight } from './icon';
@@ -11,7 +11,10 @@ import { IOptions } from '../..';
 import { intl } from '../../locale';
 import { AddFile } from '../addFile';
 
-function filterResourceList(resourceList: IPublicModelResource[] | undefined, handler?: Function) {
+function filterResourceList(
+  resourceList: IPublicModelResource[] | undefined,
+  handler?: Function
+) {
   if (typeof handler === 'function') {
     return handler(resourceList);
   }
@@ -21,11 +24,21 @@ function filterResourceList(resourceList: IPublicModelResource[] | undefined, ha
 
 export function ResourcePaneContent(props: IPluginOptions) {
   const { workspace } = props.pluginContext || {};
-  const [resourceList, setResourceList] = useState<IPublicModelResource[] | undefined>(
-    filterResourceList(workspace?.resourceList, props?.options?.filterResourceList)
+  const [resourceList, setResourceList] = useState<
+    IPublicModelResource[] | undefined
+  >(
+    filterResourceList(
+      workspace?.resourceList,
+      props?.options?.filterResourceList
+    )
   );
   workspace?.onResourceListChange(() => {
-    setResourceList(filterResourceList(workspace?.resourceList, props?.options?.filterResourceList));
+    setResourceList(
+      filterResourceList(
+        workspace?.resourceList,
+        props?.options?.filterResourceList
+      )
+    );
   });
   return (
     <ResourceListTree
@@ -133,10 +146,7 @@ function ResourceGroup(
 
   if (!props.categoryName || props.categoryName === 'undefined') {
     return (
-      <div
-        className="resource-tree-group"
-        data-depth={props.depth}
-      >
+      <div className="resource-tree-group" data-depth={props.depth}>
         {resourceArr.map((d) => (
           <ResourceItem
             children={d.children}
@@ -154,32 +164,33 @@ function ResourceGroup(
     );
   }
 
-  const ContextMenu = props.pluginContext?.commonUI?.ContextMenu || React.Fragment;
+  const ContextMenu =
+    props.pluginContext?.commonUI?.ContextMenu || React.Fragment;
   const indent = props.depth * 28 + 12;
 
   const style = {
     paddingLeft: indent,
     marginLeft: -indent,
-  }
+  };
 
   return (
-    <div
-      className="resource-tree-group"
-      data-depth={props.depth}
-    >
+    <div className="resource-tree-group" data-depth={props.depth}>
       <ContextMenu
-        menus={props.options?.resourceGroupContextMenuActions?.(props.pluginContext!, resourceArr) || []}
+        menus={
+          props.options?.resourceGroupContextMenuActions?.(
+            props.pluginContext!,
+            resourceArr
+          ) || []
+        }
       >
         <div
-          className='resource-tree-group-wrap'
+          className="resource-tree-group-wrap"
           style={style}
           onClick={() => {
             setExpanded(!expanded);
           }}
         >
-          <div
-            className={`resource-tree-expand ${expanded ? 'expanded' : ''}`}
-          >
+          <div className={`resource-tree-expand ${expanded ? 'expanded' : ''}`}>
             <IconArrowRight />
           </div>
           <div className="resource-tree-group-icon">
@@ -229,27 +240,35 @@ function ResourceItem(props: {
   const style = {
     paddingLeft: indent,
     marginLeft: -indent,
-  }
+  };
   if (!display) {
     return null;
   }
 
-  const children = props.children?.filter(d => d.config?.display !== false);
-  const {
-    disabled,
-    tips,
-  } = props.resource?.config || {};
-  const ContextMenu = props.pluginContext?.commonUI?.ContextMenu || React.Fragment;
+  const children = props.children?.filter((d) => d.config?.display !== false);
+  const { disabled, tips } = props.resource?.config || {};
+  const ContextMenu =
+    props.pluginContext?.commonUI?.ContextMenu || React.Fragment;
 
   const context = (
-    <ContextMenu menus={props.options?.resourceContextMenuActions?.(props.pluginContext!, props.resource!) || []}>
+    <ContextMenu
+      menus={
+        props.options?.resourceContextMenuActions?.(
+          props.pluginContext!,
+          props.resource!
+        ) || []
+      }
+    >
       <div
         ref={ref}
         className={`resource-tree-group-node ${
-          disabled
-            ? 'resource-tree-group-disabled'
+          disabled ? 'resource-tree-group-disabled' : ''
+        } ${
+          props.activeId === props.resource?.options.id ||
+          props.activeId === props.resource?.id
+            ? 'active'
             : ''
-        } ${props.activeId === props.resource?.options.id || props.activeId === props.resource?.id ? 'active' : ''}`}
+        }`}
         data-depth={props.depth}
       >
         <div
@@ -257,7 +276,8 @@ function ResourceItem(props: {
             if (disabled) {
               return;
             }
-            props.resource && props.pluginContext?.workspace.openEditorWindow(props.resource);
+            props.resource &&
+              props.pluginContext?.workspace.openEditorWindow(props.resource);
           }}
           className="resource-tree-title"
           style={style}
@@ -265,9 +285,13 @@ function ResourceItem(props: {
           {props.resource?.options.modified ? (
             <Balloon
               v2
-              trigger={<div className='resource-tree-group-item-modified-wrap'><div className="resource-tree-group-item-modified"></div></div>}
+              trigger={
+                <div className="resource-tree-group-item-modified-wrap">
+                  <div className="resource-tree-group-item-modified"></div>
+                </div>
+              }
               triggerType="hover"
-              align='bl'
+              align="bl"
               title=""
             >
               {props.resource.options.modifiedTips}
@@ -293,49 +317,42 @@ function ResourceItem(props: {
           <div className="resource-tree-group-title-label">
             {props.resource?.options?.label || props.resource?.title}
 
-            {
-              props.resource?.options?.slug ||
-              props.resource?.options?.componentName ? (
-                <span className="resource-tree-group-item-code">
-                  ({ props.resource.options?.slug || props.resource.options?.componentName })
-                </span>
-              ) : null
-            }
+            {props.resource?.options?.slug ||
+            props.resource?.options?.componentName ? (
+              <span className="resource-tree-group-item-code">
+                (
+                {props.resource.options?.slug ||
+                  props.resource.options?.componentName}
+                )
+              </span>
+            ) : null}
           </div>
-
 
           <div className="resource-tree-group-item-behaviors">
             {Behaviors &&
             (props.resource?.config as any)?.disableBehaviors !== true ? (
-              <Behaviors
-                resource={props.resource}
-                safeNode={ref?.current}
-              />
+              <Behaviors resource={props.resource} safeNode={ref?.current} />
             ) : null}
           </div>
         </div>
 
-        {
-          expanded && children?.length ? (
-            <div className='resource-tree-children'>
-              {
-                props.children?.map((child) => (
-                  <ResourceItem
-                    children={child.children}
-                    icon={child.icon}
-                    key={child.id}
-                    activeId={props.activeId}
-                    resource={child}
-                    behaviors={props.behaviors}
-                    options={props.options}
-                    pluginContext={props.pluginContext}
-                    depth={props.depth + 1}
-                  />
-                ))
-              }
-            </div>
-          ) : null
-        }
+        {expanded && children?.length ? (
+          <div className="resource-tree-children">
+            {props.children?.map((child) => (
+              <ResourceItem
+                children={child.children}
+                icon={child.icon}
+                key={child.id}
+                activeId={props.activeId}
+                resource={child}
+                behaviors={props.behaviors}
+                options={props.options}
+                pluginContext={props.pluginContext}
+                depth={props.depth + 1}
+              />
+            ))}
+          </div>
+        ) : null}
       </div>
     </ContextMenu>
   );
@@ -344,9 +361,9 @@ function ResourceItem(props: {
     return (
       <Balloon
         v2
-        trigger={<div>{ context }</div>}
+        trigger={<div>{context}</div>}
         triggerType="hover"
-        align='r'
+        align="r"
         title=""
       >
         {tips}

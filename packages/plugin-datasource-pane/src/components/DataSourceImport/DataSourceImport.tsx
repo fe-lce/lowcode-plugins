@@ -7,7 +7,7 @@ import React, { PureComponent } from 'react';
 import _isArray from 'lodash/isArray';
 import _last from 'lodash/last';
 import _isPlainObject from 'lodash/isPlainObject';
-import MonacoEditor from '@alilc/lowcode-plugin-base-monaco-editor';
+import MonacoEditor from '@felce/lowcode-plugin-base-monaco-editor';
 import type { editor } from 'monaco-editor';
 import { RuntimeDataSourceConfig as DataSourceConfig } from '@alilc/lowcode-datasource-types';
 import Ajv from 'ajv';
@@ -40,10 +40,10 @@ export class DataSourceImport extends PureComponent<
           timeout: 5000,
           uri: '/info',
           params: {},
-          headers: {}
+          headers: {},
         },
-        id: 'info'
-      }
+        id: 'info',
+      },
     ],
   };
 
@@ -67,7 +67,11 @@ export class DataSourceImport extends PureComponent<
 
   constructor(props: DataSourceImportProps) {
     super(props);
-    this.state.code = JSON.stringify(this.deriveValue(this.props.defaultValue), null, 2);
+    this.state.code = JSON.stringify(
+      this.deriveValue(this.props.defaultValue),
+      null,
+      2
+    );
     this.handleEditorDidMount = this.handleEditorDidMount.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
@@ -92,7 +96,7 @@ export class DataSourceImport extends PureComponent<
       if (!dataSource.type) return false;
 
       const dataSourceType = dataSourceTypes.find(
-        (type) => type.type === dataSource.type,
+        (type) => type.type === dataSource.type
       );
 
       if (!dataSourceType) return false;
@@ -100,13 +104,13 @@ export class DataSourceImport extends PureComponent<
       // 向下兼容
       if (dataSourceType.schema) {
         // 校验失败的数据源，给予用户提示
-        const validate = ajv.compile(dataSourceType.schema)
-        const valid = validate(dataSource)
-        if (!valid) console.warn(validate.errors)
-        return valid
+        const validate = ajv.compile(dataSourceType.schema);
+        const valid = validate(dataSource);
+        if (!valid) console.warn(validate.errors);
+        return valid;
       } else {
         // 用户不传入 schema 校验规则，默认返回 true
-        return true
+        return true;
       }
     });
   };

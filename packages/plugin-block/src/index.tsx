@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IPublicModelPluginContext } from '@alilc/lowcode-types';
+import { IPublicModelPluginContext } from '@felce/lowcode-types';
 import { default as BlockPane } from './pane';
 
 const LowcodePluginCusPlugin = (ctx: IPublicModelPluginContext) => {
@@ -15,13 +15,13 @@ const LowcodePluginCusPlugin = (ctx: IPublicModelPluginContext) => {
         func: () => {
           console.log('方法也是一样');
         },
-      }
+      };
     },
     // 插件的初始化函数，在引擎初始化之后会立刻调用
     init() {
       // 你可以拿到其他插件暴露的方法和属性
       // const { data, func } = ctx.plugins.pluginA;
-      // func(); 
+      // func();
 
       // console.log(options.name);
 
@@ -31,7 +31,12 @@ const LowcodePluginCusPlugin = (ctx: IPublicModelPluginContext) => {
         name: 'blockPane',
         type: 'PanelDock',
         props: {
-          icon: <img src='https://i.ablula.tech/portal/block.svg' style={{ filter: 'brightness(1)' }} />,
+          icon: (
+            <img
+              src="https://i.ablula.tech/portal/block.svg"
+              style={{ filter: 'brightness(1)' }}
+            />
+          ),
           description: '区块面板',
         },
         content: BlockPane,

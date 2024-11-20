@@ -1,5 +1,5 @@
 {
-  "name": "@alilc/lowcode-plugin-datasource-pane",
+  "name": "@felce/lowcode-plugin-datasource-pane",
   "version": "1.0.11",
   "description": "低代码引擎数据源面板",
   "main": "lib/index.js",
@@ -27,20 +27,20 @@
     "@alib/build-scripts": "^0.1.32",
     "@alifd/theme-lowcode-light": "^0.2.1",
     "@alilc/build-plugin-alt": "^1.2.2",
-    "@alilc/lowcode-engine": "beta",
-    "@alilc/lowcode-shell": "^1.0.0",
-    "@alilc/lowcode-types": "beta",
+    "@felce/lowcode-engine": "beta",
+    "@felce/lowcode-shell": "^1.0.0",
+    "@felce/lowcode-types": "beta",
     "@types/babel-types": "^7.0.9",
     "@types/babel__preset-env": "^7.9.2",
-    "@types/react": "^16.9.13",
-    "@types/react-dom": "^16.9.4",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "@types/traverse": "^0.6.32",
     "build-plugin-fusion": "^0.1.9",
     "build-plugin-moment-locales": "^0.1.3",
     "monaco-editor": "^0.21.0"
   },
   "peerDependencies": {
-    "@alifd/next": "^1.20.28",
+    "@alifd/next": "^1.25.13",
     "moment": "^2.29.1"
   },
   "dependencies": {
@@ -55,15 +55,15 @@
     "babel-plugin-transform-remove-strict-mode": "^0.0.2",
     "classnames": "^2.3.1",
     "js-beautify": "^1.14.0",
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1",
-    "@alilc/lowcode-plugin-base-monaco-editor": "^1.0.0",
-    "@alilc/lowcode-types": "^1.0.0-beta.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "@felce/lowcode-plugin-base-monaco-editor": "^1.1.2",
+    "@felce/lowcode-types": "^1.0.0-beta.3",
     "@formily/core": "^2.1.12",
     "@formily/next": "^2.1.12",
     "@formily/react": "^2.1.12",
     "@types/lodash": "^4.14.178",
-    "@xstate/react": "^1.6.1",
+    "@xstate/react": "^4.1.3",
     "ajv": "^6.12.4",
     "lodash": "^4.17.20",
     "react-copy-to-clipboard": "^5.0.4",
@@ -72,12 +72,12 @@
     "react-error-boundary": "^3.1.4",
     "svgo": "2.x",
     "traverse": "^0.6.6",
-    "xstate": "^4.26.0"
+    "xstate": "^5.18.2"
   },
-  "homepage": "https://unpkg.com/@alilc/lowcode-plugin-datasource-pane@1.0.11/build/index.html",
+  "homepage": "https://unpkg.com/@felce/lowcode-plugin-datasource-pane@1.0.11/build/index.html",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alibaba/lowcode-plugins.git",
+    "url": "https://github.com/fe-lce/lowcode-plugins.git",
     "directory": "packages/plugin-datasource-pane"
   }
 }

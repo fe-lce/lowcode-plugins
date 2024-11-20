@@ -4,7 +4,7 @@ import {
   IPublicModelResource,
   IPublicTypeSkeletonConfig,
   IPublicTypeContextMenuAction,
-} from '@alilc/lowcode-types';
+} from '@felce/lowcode-types';
 import Icon from './icon';
 import { Pane } from './pane';
 import './index.scss';
@@ -26,17 +26,25 @@ export interface IOptions {
   /**
    * 右键菜单项
    */
-  contextMenuActions?: (ctx: IPublicModelPluginContext) => IPublicTypeContextMenuAction[];
+  contextMenuActions?: (
+    ctx: IPublicModelPluginContext
+  ) => IPublicTypeContextMenuAction[];
 
   /**
    * 右键资源项，菜单项
    */
-  resourceContextMenuActions?: (ctx: IPublicModelPluginContext, resource: IPublicModelResource) => IPublicTypeContextMenuAction[];
+  resourceContextMenuActions?: (
+    ctx: IPublicModelPluginContext,
+    resource: IPublicModelResource
+  ) => IPublicTypeContextMenuAction[];
 
   /**
    * 右键资源组，菜单项
    */
-  resourceGroupContextMenuActions?: (ctx: IPublicModelPluginContext, resources: IPublicModelResource[]) => IPublicTypeContextMenuAction[];
+  resourceGroupContextMenuActions?: (
+    ctx: IPublicModelPluginContext,
+    resources: IPublicModelResource[]
+  ) => IPublicTypeContextMenuAction[];
 }
 
 const ViewManagerPane = (
@@ -54,7 +62,9 @@ const ViewManagerPane = (
         props: {
           icon: <Icon showIconText={showIconText} />,
           description: intl('view_manager.src.ViewManagement'),
-          className: `workspace-view-pane-icon ${showIconText ? 'show-icon-text' : null }`,
+          className: `workspace-view-pane-icon ${
+            showIconText ? 'show-icon-text' : null
+          }`,
         },
         panelProps: {
           width: '200px',
@@ -136,7 +146,7 @@ ViewManagerPane.meta = {
         key: 'skeletonConfig',
         type: 'object',
         description: '',
-      }
+      },
     ],
   },
 };

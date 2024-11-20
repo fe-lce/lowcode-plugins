@@ -1,37 +1,38 @@
 import React from 'react';
 import { NumberPicker, Icon } from '@alifd/next';
-import { IPublicModelPluginContext } from '@alilc/lowcode-types';
+import { IPublicModelPluginContext } from '@felce/lowcode-types';
 
 import './index.scss';
 
-const devices = [
-  { key: 'default' },
-  { key: 'tablet' },
-  { key: 'phone' },
-];
+const devices = [{ key: 'default' }, { key: 'tablet' }, { key: 'phone' }];
 
 const CustomIcon = Icon.createFromIconfontCN({
   scriptUrl: 'https://at.alicdn.com/t/font_2896595_33xhsbg9ux5.js',
 });
 
 export class SimulatorResizePane extends React.Component<{
-  pluginContext: IPublicModelPluginContext
+  pluginContext: IPublicModelPluginContext;
 }> {
   static displayName = 'SimulatorResizePane';
 
   state = {
     active: 'default',
-    currentWidth: null
+    currentWidth: null,
   };
 
   componentDidMount() {
     const { project } = this.props.pluginContext;
     // @ts-ignore
-    const onSimulatorRendererReady = (project.onSimulatorRendererReady || project.onRendererReady).bind(project);
+    const onSimulatorRendererReady = (
+      project.onSimulatorRendererReady || project.onRendererReady
+    ).bind(project);
     onSimulatorRendererReady(() => {
-      const currentWidth = document.querySelector('.lc-simulator-canvas')?.clientWidth || this.state.currentWidth || 0;
+      const currentWidth =
+        document.querySelector('.lc-simulator-canvas')?.clientWidth ||
+        this.state.currentWidth ||
+        0;
       this.setState({
-        currentWidth
+        currentWidth,
       });
     });
     project.onSimulatorHostReady?.((simulator) => {
@@ -52,10 +53,13 @@ export class SimulatorResizePane extends React.Component<{
       document.querySelector('.lc-simulator-canvas').style.width = null;
     }
     setTimeout(() => {
-      const currentWidth = document.querySelector('.lc-simulator-canvas')?.clientWidth || this.state.currentWidth || 0;
+      const currentWidth =
+        document.querySelector('.lc-simulator-canvas')?.clientWidth ||
+        this.state.currentWidth ||
+        0;
       this.setState({
         active: device,
-        currentWidth
+        currentWidth,
       });
     }, 0);
   };
@@ -78,19 +82,19 @@ export class SimulatorResizePane extends React.Component<{
     const { project } = this.props.pluginContext;
     return (
       <div className="lp-simulator-pane">
-        {
-          devices.map((item, index) => {
-            return (
-              <span
-                key={item.key}
-                className={`lp-simulator-pane-item ${this.state.active === item.key ? 'active' : ''}`}
-                onClick={this.change.bind(this, item.key)}
-              >
-                {this.renderItemSVG(item.key)}
-              </span>
-            );
-          })
-        }
+        {devices.map((item, index) => {
+          return (
+            <span
+              key={item.key}
+              className={`lp-simulator-pane-item ${
+                this.state.active === item.key ? 'active' : ''
+              }`}
+              onClick={this.change.bind(this, item.key)}
+            >
+              {this.renderItemSVG(item.key)}
+            </span>
+          );
+        })}
         <div className="lp-simulator-width-setter">
           <NumberPicker
             className="lp-simulator-width-input"
@@ -99,7 +103,7 @@ export class SimulatorResizePane extends React.Component<{
             placeholder="请输入"
             onChange={(value) => {
               this.setState({
-                currentWidth: value
+                currentWidth: value,
               });
             }}
             onPressEnter={(event: any) => {
@@ -111,7 +115,7 @@ export class SimulatorResizePane extends React.Component<{
                 },
               });
               this.setState({
-                currentWidth: value
+                currentWidth: value,
               });
             }}
           />
@@ -143,7 +147,7 @@ const plugin = (ctx: IPublicModelPluginContext) => {
           />
         ),
       });
-    }
+    },
   };
 };
 

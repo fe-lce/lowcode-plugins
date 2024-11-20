@@ -1,5 +1,5 @@
 {
-  "name": "@alilc/lowcode-plugin-components-pane",
+  "name": "@felce/lowcode-plugin-components-pane",
   "version": "2.0.4",
   "description": "低代码组件面板",
   "files": [
@@ -23,6 +23,9 @@
   ],
   "authors": [
     {
+      "name": "taojiu"
+    },
+    {
       "name": "gray.wjf"
     },
     {
@@ -32,10 +35,10 @@
   "license": "ISC",
   "devDependencies": {
     "@alib/build-scripts": "^0.1.32",
-    "@alifd/next": "^1.23.12",
+    "@alifd/next": "^1.25.13",
     "@svgr/webpack": "^5.5.0",
-    "@types/react": "^16.9.13",
-    "@types/react-dom": "^16.9.4",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "@typescript-eslint/parser": "^4.28.3",
     "build-plugin-component": "^1.12.0",
     "build-plugin-fusion": "^0.1.0",
@@ -45,7 +48,7 @@
     "html-webpack-plugin": "^5.3.2",
     "moment": "^2.29.1",
     "@alilc/build-plugin-alt": "^1.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^18.3.1"
   },
   "husky": {
     "hooks": {
@@ -54,14 +57,14 @@
     }
   },
   "dependencies": {
-    "@alilc/lowcode-types": "^1.0.0",
+    "@felce/lowcode-types": "^1.0.0",
     "classnames": "^2.3.1",
     "lodash.debounce": "^4.0.8",
-    "react": "^16.0.0"
+    "react": "^18.3.1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/alibaba/lowcode-plugins.git",
+    "url": "https://github.com/fe-lce/lowcode-plugins.git",
     "directory": "packages/plugin-components-pane"
   }
 }

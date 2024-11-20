@@ -1,7 +1,7 @@
 {
-  "name": "@alilc/lowcode-plugin-zh-en",
+  "name": "@felce/lowcode-plugin-zh-en",
   "version": "1.0.0",
-  "description": "alibaba lowcode editor zhong english plugin",
+  "description": "lowcode engine editor zhong english plugin",
   "files": [
     "es",
     "lib"
@@ -14,17 +14,17 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@alilc/lowcode-types": "^1.0.0",
-    "@alilc/lowcode-utils": "^1.0.0",
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1"
+    "@felce/lowcode-types": "^1.0.0",
+    "@felce/lowcode-utils": "^1.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@alib/build-scripts": "^0.1.3",
     "@alilc/build-plugin-alt": "^1.0.0",
-    "@alilc/lowcode-engine": "^1.0.0",
-    "@types/react": "^16.9.13",
-    "@types/react-dom": "^16.9.4",
+    "@felce/lowcode-engine": "^1.0.0",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "build-plugin-fusion": "^0.1.22"
   },
   "publishConfig": {
@@ -33,7 +33,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/alibaba/lowcode-plugins.git",
+    "url": "https://github.com/fe-lce/lowcode-plugins.git",
     "directory": "packages/plugin-zh-en"
   }
 }

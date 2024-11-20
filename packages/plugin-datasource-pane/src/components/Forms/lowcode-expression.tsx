@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from '@formily/react';
-import { JSExpression } from '@alilc/lowcode-types';
+import { JSExpression } from '@felce/lowcode-types';
 import _noop from 'lodash/noop';
 import { EditorContext } from '../../utils/editor-context';
 import { generateClassName } from '../../utils/misc';
@@ -20,7 +20,6 @@ export class LowcodeExpressionComp extends PureComponent<LowcodeExpressionProps>
     onChange: _noop,
   };
 
-
   handleChange = (newValue: JSExpression) => {
     this.props?.onChange?.(newValue);
   };
@@ -31,7 +30,8 @@ export class LowcodeExpressionComp extends PureComponent<LowcodeExpressionProps>
       <div className={className}>
         <EditorContext.Consumer>
           {({ setters }) => {
-            const ExpressionSetter = setters?.getSetter('ExpressionSetter').component;
+            const ExpressionSetter =
+              setters?.getSetter('ExpressionSetter').component;
             if (!ExpressionSetter) return null;
             return (
               <ExpressionSetter

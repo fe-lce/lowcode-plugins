@@ -1,11 +1,19 @@
 import { js_beautify, css_beautify } from 'js-beautify';
-import { isJSExpression, ProjectSchema, RootSchema } from '@alilc/lowcode-types';
+import {
+  isJSExpression,
+  ProjectSchema,
+  RootSchema,
+} from '@felce/lowcode-types';
 import { Dialog } from '@alifd/next';
 import { IState } from '../types';
 import { WORDS } from '../config';
 import type { Method } from '../types/methods';
 
-const js_beautify_config = { indent_size: 2, indent_empty_lines: true, e4x: true };
+const js_beautify_config = {
+  indent_size: 2,
+  indent_empty_lines: true,
+  e4x: true,
+};
 
 const initCode = (componentSchema: RootSchema | undefined) => {
   const code = `class Page extends Component {
@@ -31,7 +39,7 @@ export const schema2CssCode = (schema: ProjectSchema) => {
 
 export const beautifyCSS = (input?: string): string => {
   return input ? css_beautify(input, { indent_size: 2 }) : '';
-}
+};
 
 function initStateCode(componentSchema: RootSchema | undefined) {
   if (componentSchema?.state) {
@@ -41,13 +49,14 @@ function initStateCode(componentSchema: RootSchema | undefined) {
       if (typeof state === 'object' && isJSExpression(state)) {
         statesStr += `"${key}": ${(state as IState).source || state.value},\n`;
       } else {
-        statesStr += `"${key}": ${typeof state === 'string' ? '"' + state + '"' : state},,\n`;
+        statesStr += `"${key}": ${
+          typeof state === 'string' ? '"' + state + '"' : state
+        },,\n`;
       }
     });
     statesStr += '}';
     return statesStr;
   }
-
 }
 
 function initLifeCycleCode(componentSchema: RootSchema | undefined) {
@@ -91,7 +100,10 @@ function initMethodsCode(componentSchema: RootSchema | undefined) {
 }
 
 function createFunctionCode(functionName: string, functionNode: Method) {
-  if (functionNode?.type === 'JSExpression' || functionNode?.type === 'JSFunction') {
+  if (
+    functionNode?.type === 'JSExpression' ||
+    functionNode?.type === 'JSFunction'
+  ) {
     // 读取原始代码
     let functionCode = functionNode.source;
     if (functionCode) {

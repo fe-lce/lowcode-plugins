@@ -1,4 +1,4 @@
-import { init, plugins } from '@alilc/lowcode-engine';
+import { init, plugins } from '@felce/lowcode-engine';
 import registerPlugins from './plugin';
 import { scenarioSwitcher } from '../../sample-plugins/scenario-switcher';
 import '../../universal/global.scss';
@@ -36,6 +36,6 @@ preference.set('DataSourcePane', {
         'https://alifd.alicdn.com/npm/@alilc/lowcode-react-simulator-renderer@latest/dist/js/react-simulator-renderer.js',
       ],
     },
-    preference,
+    preference
   );
 })();

@@ -1,4 +1,4 @@
-import { IPublicModelPluginContext } from '@alilc/lowcode-types';
+import { IPublicModelPluginContext } from '@felce/lowcode-types';
 import ComponentsPane from './pane';
 const ComponentPanelPlugin = (ctx: IPublicModelPluginContext) => {
   return {
@@ -20,10 +20,9 @@ const ComponentPanelPlugin = (ctx: IPublicModelPluginContext) => {
       componentsPane?.disable?.();
       project.onSimulatorRendererReady(() => {
         componentsPane?.enable?.();
-      })
+      });
     },
   };
-}
+};
 ComponentPanelPlugin.pluginName = 'ComponentPanelPlugin';
 export default ComponentPanelPlugin;
-

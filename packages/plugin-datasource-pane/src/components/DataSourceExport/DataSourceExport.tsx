@@ -7,7 +7,7 @@ import React, { PureComponent } from 'react';
 import { Button, Message } from '@alifd/next';
 import _isArray from 'lodash/isArray';
 import _isPlainObject from 'lodash/isPlainObject';
-import MonacoEditor from '@alilc/lowcode-plugin-base-monaco-editor';
+import MonacoEditor from '@felce/lowcode-plugin-base-monaco-editor';
 import type { editor } from 'monaco-editor';
 import { RuntimeDataSourceConfig as DataSourceConfig } from '@alilc/lowcode-datasource-types';
 import Ajv from 'ajv';
@@ -27,7 +27,10 @@ export interface DataSourceExportState {
   isCodeValid: boolean;
 }
 
-export class DataSourceExport extends PureComponent<DataSourceExportProps, DataSourceExportState> {
+export class DataSourceExport extends PureComponent<
+  DataSourceExportProps,
+  DataSourceExportState
+> {
   static defaultProps = {
     dataSourceList: [],
   };
@@ -39,10 +42,10 @@ export class DataSourceExport extends PureComponent<DataSourceExportProps, DataS
 
   submit = () => {
     return new Promise((resolve, reject) => {
-    const { isCodeValid, code } = this.state;
+      const { isCodeValid, code } = this.state;
 
-    if (isCodeValid) reject(new Error('格式有误'));
-    resolve({ schema: code });
+      if (isCodeValid) reject(new Error('格式有误'));
+      resolve({ schema: code });
     });
   };
 
@@ -50,7 +53,11 @@ export class DataSourceExport extends PureComponent<DataSourceExportProps, DataS
 
   constructor(props: DataSourceExportProps) {
     super(props);
-    this.state.code = JSON.stringify(this.deriveValue(this.props.dataSourceList), null, 2);
+    this.state.code = JSON.stringify(
+      this.deriveValue(this.props.dataSourceList),
+      null,
+      2
+    );
     this.handleEditorDidMount = this.handleEditorDidMount.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
   }
@@ -62,10 +69,10 @@ export class DataSourceExport extends PureComponent<DataSourceExportProps, DataS
 
     let result = value;
     if (_isPlainObject(result)) {
-    // 如果是对象则转化成数组
-    result = [result];
+      // 如果是对象则转化成数组
+      result = [result];
     } else if (!_isArray(result)) {
-    return [];
+      return [];
     }
 
     const ajv = new Ajv();
@@ -73,20 +80,22 @@ export class DataSourceExport extends PureComponent<DataSourceExportProps, DataS
     return (result as DataSourceConfig[]).filter((dataSource) => {
       if (!dataSource.type) return false;
 
-      const dataSourceType = dataSourceTypes.find((type) => type.type === dataSource.type);
+      const dataSourceType = dataSourceTypes.find(
+        (type) => type.type === dataSource.type
+      );
 
       if (!dataSourceType) return false;
 
       // 向下兼容
       if (dataSourceType.schema) {
         // 校验失败的数据源，给予用户提示
-        const validate = ajv.compile(dataSourceType.schema)
-        const valid = validate(dataSource)
-        if (!valid) console.warn(validate.errors)
-        return valid
+        const validate = ajv.compile(dataSourceType.schema);
+        const valid = validate(dataSource);
+        if (!valid) console.warn(validate.errors);
+        return valid;
       } else {
         // 用户不传入 schema 校验规则，默认返回 true
-        return true
+        return true;
       }
     });
   };
@@ -97,7 +106,11 @@ export class DataSourceExport extends PureComponent<DataSourceExportProps, DataS
 
   handleEditorChange = (newValue) => {
     if (this.monacoRef) {
-      if (!this.monacoRef.getModelMarkers().find((marker: editor.IMarker) => marker.owner === 'json')) {
+      if (
+        !this.monacoRef
+          .getModelMarkers()
+          .find((marker: editor.IMarker) => marker.owner === 'json')
+      ) {
         this.setState({ isCodeValid: true, code: newValue });
       }
     }
@@ -108,7 +121,11 @@ export class DataSourceExport extends PureComponent<DataSourceExportProps, DataS
   };
 
   handleReset = () => {
-    const code = JSON.stringify(this.deriveValue(this.props.dataSourceList), null, 2)
+    const code = JSON.stringify(
+      this.deriveValue(this.props.dataSourceList),
+      null,
+      2
+    );
     if (this.monacoRef) {
       this.monacoRef.getModels()?.[0]?.setValue?.(code);
     }
@@ -135,13 +152,9 @@ export class DataSourceExport extends PureComponent<DataSourceExportProps, DataS
         {!isCodeValid && <p className="error-msg">格式有误</p>}
         <p className={generateClassName('export-btns')}>
           <CopyToClipboard text={code} onCopy={this.handleCopy}>
-            <Button type="primary">
-              将代码复制到粘贴板
-            </Button>
+            <Button type="primary">将代码复制到粘贴板</Button>
           </CopyToClipboard>
-          <Button onClick={this.handleReset}>
-            重置
-          </Button>
+          <Button onClick={this.handleReset}>重置</Button>
         </p>
       </div>
     );

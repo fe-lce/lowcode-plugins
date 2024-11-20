@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
-import MonacoEditor from '@alilc/lowcode-plugin-base-monaco-editor';
+import MonacoEditor from '@felce/lowcode-plugin-base-monaco-editor';
 import { Tab } from '@alifd/next';
 
-import { IEditorInstance } from '@alilc/lowcode-plugin-base-monaco-editor/lib/helper';
+import { IEditorInstance } from '@felce/lowcode-plugin-base-monaco-editor/lib/helper';
 
 import { TAB_KEY } from '../../config';
 
@@ -48,11 +48,7 @@ export class CssEditor extends PureComponent<CssEditorProps, CssEditorState> {
     const { code } = this.state;
     return (
       <>
-        <Tab
-          size="small"
-          shape="wrapped"
-          activeKey={this.props.currentTab}
-        >
+        <Tab size="small" shape="wrapped" activeKey={this.props.currentTab}>
           <Tab.Item
             title={`${code !== this.props.cssCode ? '* ' : ''}index.css`}
             key={TAB_KEY.CSS}

@@ -9,11 +9,11 @@
 
 ## 1.0.3 / 2022-07-11
 
-- Fix 源码面板高度塌陷的 [bug](https://github.com/alibaba/lowcode-engine/issues/803)
+- Fix 源码面板高度塌陷的 [bug](https://github.com/fe-lce/lowcode-engine/issues/803)
 
 ## 1.0.2 / 2022-05-05
 
-* Fix [schema export issue](https://github.com/alibaba/lowcode-engine/issues/416)
+- Fix [schema export issue](https://github.com/fe-lce/lowcode-engine/issues/416)
 
 ## 1.0.1
 
@@ -47,7 +47,7 @@ Can't import the named export 'presortedDecodedMap' from non EcmaScript module (
 
 ## 0.5.1
 
-发布下述（0.4.2-beta.2～0.5.1-beta.8）所有变更点。
+发布下述（0.4.2-beta.2 ～ 0.5.1-beta.8）所有变更点。
 
 ## 0.5.1-beta.8
 
@@ -56,7 +56,7 @@ Can't import the named export 'presortedDecodedMap' from non EcmaScript module (
 
 ## 0.5.1-beta.7
 
-- 升级到 `@alilc/lowcode-plugin-base-monaco-editor` 0.1.0-beta.13
+- 升级到 `@felce/lowcode-plugin-base-monaco-editor` 0.1.0-beta.13
 
 ## 0.5.1-beta.6
 
@@ -139,7 +139,7 @@ Can't import the named export 'presortedDecodedMap' from non EcmaScript module (
 
 ## 0.5.0-beta.0
 
-- 内部依赖的 @alilc/lowcode-plugin-base-monaco-editor 升级到 0.1.0-beta.2，已支持 `?.` 等形态的语法
+- 内部依赖的 @felce/lowcode-plugin-base-monaco-editor 升级到 0.1.0-beta.2，已支持 `?.` 等形态的语法
 
 ## 0.4.2-beta.2
 

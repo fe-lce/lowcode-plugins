@@ -1,6 +1,10 @@
 // @todo schema default
 import React, { PureComponent } from 'react';
-import { createForm, registerValidateRules, Form as FormilyForm } from '@formily/core';
+import {
+  createForm,
+  registerValidateRules,
+  Form as FormilyForm,
+} from '@formily/core';
 import { createSchemaField } from '@formily/react';
 import {
   Space,
@@ -34,7 +38,7 @@ import { generateClassName } from '../../utils/misc';
 import { filterXDisplay } from '../../utils/filter-x-display';
 
 import { DataSourceFormProps, DataSourceFormMode } from '../../types';
-import { isJSExpression } from '@alilc/lowcode-types';
+import { isJSExpression } from '@felce/lowcode-types';
 
 const SCHEMA = {
   type: 'object',
@@ -86,10 +90,12 @@ const SCHEMA = {
           type: 'string',
           title: '请求方法',
           required: true,
-          enum: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'].map((i) => ({
-            label: i,
-            value: i,
-          })),
+          enum: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'].map(
+            (i) => ({
+              label: i,
+              value: i,
+            })
+          ),
           'x-component': 'Select',
           default: 'GET',
           'x-decorator-props': {
@@ -175,23 +181,25 @@ const SCHEMA = {
   },
 };
 
-
 /**
  * 通过是否存在 ID 来决定读写状态
  */
-export class DataSourceForm extends PureComponent<DataSourceFormProps, { form: FormilyForm } > {
-  constructor (props) {
-    super(props)
+export class DataSourceForm extends PureComponent<
+  DataSourceFormProps,
+  { form: FormilyForm }
+> {
+  constructor(props) {
+    super(props);
 
     this.state = {
-      form: this.createForm()
-    }
+      form: this.createForm(),
+    };
   }
 
   createForm(): FormilyForm {
     return createForm({
       initialValues: this.deriveInitialData(this.props.dataSource),
-    })
+    });
   }
 
   componentDidUpdate(prevProps: DataSourceFormProps) {
@@ -200,8 +208,8 @@ export class DataSourceForm extends PureComponent<DataSourceFormProps, { form: F
     // dataSource 或 dataSourceType.type 变了，需要更新 form，界面刷新
     if (this.props.dataSource !== prevProps.dataSource || type !== ptype) {
       this.setState({
-        form: this.createForm()
-      })
+        form: this.createForm(),
+      });
     }
   }
 
@@ -216,7 +224,7 @@ export class DataSourceForm extends PureComponent<DataSourceFormProps, { form: F
               acc[cur.name] = cur.value;
               return acc;
             },
-            {},
+            {}
           );
         }
         if (_isArray(_get(formData, 'options.headers'))) {
@@ -226,7 +234,7 @@ export class DataSourceForm extends PureComponent<DataSourceFormProps, { form: F
               acc[cur.name] = cur.value;
               return acc;
             },
-            {},
+            {}
           );
         }
         return formData;
@@ -241,7 +249,10 @@ export class DataSourceForm extends PureComponent<DataSourceFormProps, { form: F
     const { dataSourceType } = this.props;
     const result: any = _cloneDeep(dataSource);
     // TODO
-    if (_isPlainObject(_get(result, 'options.params')) && !isJSExpression(_get(result, 'options.params'))) {
+    if (
+      _isPlainObject(_get(result, 'options.params')) &&
+      !isJSExpression(_get(result, 'options.params'))
+    ) {
       result.options.params = Object.keys(result.options.params).reduce(
         (acc: any, cur: any) => {
           acc.push({
@@ -250,10 +261,13 @@ export class DataSourceForm extends PureComponent<DataSourceFormProps, { form: F
           });
           return acc;
         },
-        [],
+        []
       );
     }
-    if (_isPlainObject(_get(result, 'options.headers')) && !isJSExpression(_get(result, 'options.headers'))) {
+    if (
+      _isPlainObject(_get(result, 'options.headers')) &&
+      !isJSExpression(_get(result, 'options.headers'))
+    ) {
       result.options.headers = Object.keys(result.options.headers).reduce(
         (acc: any, cur: any) => {
           acc.push({
@@ -262,7 +276,7 @@ export class DataSourceForm extends PureComponent<DataSourceFormProps, { form: F
           });
           return acc;
         },
-        [],
+        []
       );
     }
 
@@ -294,7 +308,7 @@ export class DataSourceForm extends PureComponent<DataSourceFormProps, { form: F
         if (_isArray(objValue)) {
           return srcValue;
         }
-      },
+      }
     );
 
     // 过滤 x-display 值为隐藏的属性
@@ -358,9 +372,9 @@ export class DataSourceForm extends PureComponent<DataSourceFormProps, { form: F
                   'x-component': 'ArrayItems.Remove',
                 },
               },
-              },
             },
           },
+        },
         properties: {
           addition: {
             type: 'void',

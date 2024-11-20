@@ -1,6 +1,6 @@
 import React from 'react';
 import { Search } from '@alifd/next';
-import { PluginProps } from '@alilc/lowcode-types';
+import { PluginProps } from '@felce/lowcode-types';
 import cls from 'classnames/bind';
 import debounce from 'lodash.debounce';
 import style from './index.module.scss';
@@ -10,7 +10,14 @@ import List from '../components/List';
 import Component from '../components/Component';
 import Tab from '../components/Tab';
 import ComponentManager from '../store';
-import transform, { getTextReader, SortedGroups, Text, StandardComponentMeta, SnippetMeta, createI18n } from '../utils/transform';
+import transform, {
+  getTextReader,
+  SortedGroups,
+  Text,
+  StandardComponentMeta,
+  SnippetMeta,
+  createI18n,
+} from '../utils/transform';
 
 const { material, common, project, event } = window.AliLowCodeEngine || {};
 
@@ -49,12 +56,12 @@ export default class ComponentPane extends React.Component<ComponentPaneProps, C
 
   getStrKeywords: (keywords: Text[]) => string;
 
-  getKeyToSearch (c:StandardComponentMeta|SnippetMeta){
+  getKeyToSearch(c: StandardComponentMeta | SnippetMeta) {
     const strTitle = this.t(c.title);
     const strComponentName = this.t((c as SnippetMeta).schema?.componentName);
-    const strDescription = "description" in c ? this.t(c.description):'';
-    const strKeywords = "keywords" in c ? this.getStrKeywords(c.keywords||[]):'';
-    return  `${strTitle}#${strComponentName}#${strDescription}#${strKeywords}`.toLowerCase();
+    const strDescription = 'description' in c ? this.t(c.description) : '';
+    const strKeywords = 'keywords' in c ? this.getStrKeywords(c.keywords || []) : '';
+    return `${strTitle}#${strComponentName}#${strDescription}#${strKeywords}`.toLowerCase();
   }
 
   getFilteredComponents = debounce(() => {
@@ -66,19 +73,17 @@ export default class ComponentPane extends React.Component<ComponentPaneProps, C
       return;
     }
 
-
-
     const filter = groups.map((group) => ({
       ...group,
       categories: group.categories
         .map((category) => ({
           ...category,
           components: category.components.filter((c) => {
-            let keyToSearch =  this.getKeyToSearch(c);
-            if(c.snippets){
-              c.snippets.map((item)=>{
-                keyToSearch += `_${this.getKeyToSearch(item)}`
-              })
+            let keyToSearch = this.getKeyToSearch(c);
+            if (c.snippets) {
+              c.snippets.map((item) => {
+                keyToSearch += `_${this.getKeyToSearch(item)}`;
+              });
             }
             return keyToSearch.includes(keyword);
           }),
@@ -99,7 +104,7 @@ export default class ComponentPane extends React.Component<ComponentPaneProps, C
         return keywords;
       }
       if (keywords && Array.isArray(keywords) && keywords.length) {
-        return keywords.map(keyword => this.t(keyword)).join('-');
+        return keywords.map((keyword) => this.t(keyword)).join('-');
       }
       return '';
     };
@@ -115,7 +120,7 @@ export default class ComponentPane extends React.Component<ComponentPaneProps, C
     if (assets) {
       this.initComponentList();
     } else {
-      console.warn('[ComponentsPane]: assets not ready, wait for assets ready event.')
+      console.warn('[ComponentsPane]: assets not ready, wait for assets ready event.');
     }
 
     if (isNewEngineVersion) {
@@ -207,15 +212,17 @@ export default class ComponentPane extends React.Component<ComponentPaneProps, C
     return (
       <div className={cx('empty')}>
         <img src="//g.alicdn.com/uxcore/pic/empty.png" />
-        <div className={cx('content')}>{this.t(createI18n('暂无组件，请在物料站点添加', 'No components, please add materials'))}</div>
+        <div className={cx('content')}>
+          {this.t(createI18n('暂无组件，请在物料站点添加', 'No components, please add materials'))}
+        </div>
       </div>
-    )
+    );
   }
 
   renderContent() {
     const { filter = [], keyword } = this.state;
-    const hasContent = filter.filter(item => {
-      return item?.categories?.filter(category => {
+    const hasContent = filter.filter((item) => {
+      return item?.categories?.filter((category) => {
         return category?.components?.length;
       }).length;
     }).length;
@@ -227,35 +234,45 @@ export default class ComponentPane extends React.Component<ComponentPaneProps, C
         <div ref={this.registerAdditive} className={cx('filtered-content')}>
           {filter.map((group) => {
             const { categories } = group;
-            {return categories.map((category) => {
-              const { components } = category;
-              const cname = this.t(category.name);
-              return (
-                <Category key={cname} name={cname}>
-                  <List>
-                    {components.map((component) => {
-                      const { componentName, snippets = [] } = component;
-                      return snippets.filter(snippet => snippet.id && this.getKeyToSearch(snippet).toLowerCase().includes(keyword)).map(snippet => {
-                        return (
-                          <Component
-                            data={{
-                              title: snippet.title || component.title,
-                              icon: snippet.screenshot || component.icon,
-                              snippets: [snippet]
-                            }}
-                            key={`${this.t(group.name)}_${this.t(componentName)}_${this.t(snippet.title)}`}
-                            t={this.t}
-                          />
-                        );
-                      });
-                    })}
-                  </List>
-                </Category>
-              );
-            })}
+            {
+              return categories.map((category) => {
+                const { components } = category;
+                const cname = this.t(category.name);
+                return (
+                  <Category key={cname} name={cname}>
+                    <List>
+                      {components.map((component) => {
+                        const { componentName, snippets = [] } = component;
+                        return snippets
+                          .filter(
+                            (snippet) =>
+                              snippet.id &&
+                              this.getKeyToSearch(snippet).toLowerCase().includes(keyword),
+                          )
+                          .map((snippet) => {
+                            return (
+                              <Component
+                                data={{
+                                  title: snippet.title || component.title,
+                                  icon: snippet.screenshot || component.icon,
+                                  snippets: [snippet],
+                                }}
+                                key={`${this.t(group.name)}_${this.t(componentName)}_${this.t(
+                                  snippet.title,
+                                )}`}
+                                t={this.t}
+                              />
+                            );
+                          });
+                      })}
+                    </List>
+                  </Category>
+                );
+              });
+            }
           })}
         </div>
-      )
+      );
     }
     return (
       <Tab className={cx('tabs')}>
@@ -272,19 +289,23 @@ export default class ComponentPane extends React.Component<ComponentPaneProps, C
                       <List>
                         {components.map((component) => {
                           const { componentName, snippets = [] } = component;
-                          return snippets.filter(snippet => snippet.id).map(snippet => {
-                            return (
-                              <Component
-                                data={{
-                                  title: snippet.title || component.title,
-                                  icon: snippet.screenshot || component.icon,
-                                  snippets: [snippet]
-                                }}
-                                t={this.t}
-                                key={`${this.t(group.name)}_${this.t(componentName)}_${this.t(snippet.title)}`}
-                              />
-                            );
-                          });
+                          return snippets
+                            .filter((snippet) => snippet.id)
+                            .map((snippet) => {
+                              return (
+                                <Component
+                                  data={{
+                                    title: snippet.title || component.title,
+                                    icon: snippet.screenshot || component.icon,
+                                    snippets: [snippet],
+                                  }}
+                                  t={this.t}
+                                  key={`${this.t(group.name)}_${this.t(componentName)}_${this.t(
+                                    snippet.title,
+                                  )}`}
+                                />
+                              );
+                            });
                         })}
                       </List>
                     </Category>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IPublicModelPluginContext } from '@alilc/lowcode-types';
+import { IPublicModelPluginContext } from '@felce/lowcode-types';
 import PluginSchema from './editor';
 import { enUS, zhCN } from './locale';
 
@@ -35,7 +35,7 @@ const plugin = (ctx: IPublicModelPluginContext, options: any) => {
             showProjectSchema={isProjectSchema}
           />
         ),
-      })
+      });
     },
   };
 };

@@ -1,7 +1,11 @@
 import React, { PureComponent } from 'react';
-import { project } from '@alilc/lowcode-engine';
+import { project } from '@felce/lowcode-engine';
 import { Button, Icon } from '@alifd/next';
-import { PluginProps, IPublicTypeDisposable, IPublicModelPluginContext } from '@alilc/lowcode-types';
+import {
+  PluginProps,
+  IPublicTypeDisposable,
+  IPublicModelPluginContext,
+} from '@felce/lowcode-types';
 
 import './index.scss';
 
@@ -30,7 +34,7 @@ class UndoRedo extends PureComponent<IProps, IState> {
   }
 
   init = (): void => {
-    this.changeDocumentDispose = project.onChangeDocument(doc => {
+    this.changeDocumentDispose = project.onChangeDocument((doc) => {
       this.history = doc.history;
       this.updateState(this.history?.getState() || 0);
       this.changeStateDispose?.();
@@ -107,11 +111,11 @@ const plugin = (ctx: IPublicModelPluginContext) => {
           align: 'right',
           width: 88,
         },
-      })
+      });
     },
   };
 };
 
-plugin.pluginName = 'PluginUndoRedo'
+plugin.pluginName = 'PluginUndoRedo';
 
-export default plugin
+export default plugin;

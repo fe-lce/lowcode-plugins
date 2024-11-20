@@ -1,10 +1,19 @@
 import * as React from 'react';
-import { useState, useRef, useCallback, useEffect, useLayoutEffect } from 'react';
-import MonacoEditor from '@alilc/lowcode-plugin-base-monaco-editor';
+import {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+} from 'react';
+import MonacoEditor from '@felce/lowcode-plugin-base-monaco-editor';
 
 import { Dialog, Message, Button } from '@alifd/next';
-import { IPublicEnumTransformStage, IPublicModelPluginContext } from '@alilc/lowcode-types';
-import { IEditorInstance } from '@alilc/lowcode-plugin-base-monaco-editor/lib/helper';
+import {
+  IPublicEnumTransformStage,
+  IPublicModelPluginContext,
+} from '@felce/lowcode-types';
+import { IEditorInstance } from '@felce/lowcode-plugin-base-monaco-editor/lib/helper';
 
 interface PluginCodeDiffProps {
   pluginContext: IPublicModelPluginContext;
@@ -12,13 +21,18 @@ interface PluginCodeDiffProps {
   showProjectSchema: boolean;
 }
 
-export default function PluginSchema({ pluginContext, showProjectSchema = false }: PluginCodeDiffProps) {
+export default function PluginSchema({
+  pluginContext,
+  showProjectSchema = false,
+}: PluginCodeDiffProps) {
   const { project, skeleton } = pluginContext;
 
   const [editorSize, setEditorSize] = useState({ width: 0, height: 0 });
   const getSchemaStr = useCallback(() => {
     const schema = project.exportSchema(IPublicEnumTransformStage.Save);
-    const schemaToShow = showProjectSchema? schema : schema?.componentsTree?.[0];
+    const schemaToShow = showProjectSchema
+      ? schema
+      : schema?.componentsTree?.[0];
     return schemaToShow ? JSON.stringify(schemaToShow, null, 2) : '';
   }, []);
   const [schemaValue, setSchemaValue] = useState(() => {
@@ -38,7 +52,7 @@ export default function PluginSchema({ pluginContext, showProjectSchema = false 
       if (pluginName == 'LowcodePluginAliLowcodePluginSchema') {
         setSchemaValue(getSchemaStr());
       }
-    })
+    });
     return cancelListenShowPanel;
   }, []);
 
@@ -59,7 +73,9 @@ export default function PluginSchema({ pluginContext, showProjectSchema = false 
         try {
           json = JSON.parse(monacoEditorRef.current?.getValue() ?? schemaValue);
         } catch (err) {
-          Message.error('Cannot save schema. Schema Parse Error.' + err.message);
+          Message.error(
+            'Cannot save schema. Schema Parse Error.' + err.message
+          );
           return;
         }
         if (showProjectSchema) {
@@ -74,9 +90,9 @@ export default function PluginSchema({ pluginContext, showProjectSchema = false 
         }
         Message.success('Schema Saved!');
         skeleton.hidePanel('LowcodePluginAliLowcodePluginSchema');
-      }
+      },
     });
-  }
+  };
 
   return (
     <>
@@ -95,7 +111,7 @@ export default function PluginSchema({ pluginContext, showProjectSchema = false 
           setSchemaValue(input);
         }}
         editorDidMount={(_, monacoEditor) => {
-          monacoEditorRef.current = monacoEditor
+          monacoEditorRef.current = monacoEditor;
           monacoEditor.addAction({
             id: 'my-unique-id',
             label: 'Save Schema',
@@ -107,5 +123,5 @@ export default function PluginSchema({ pluginContext, showProjectSchema = false 
         }}
       />
     </>
-  )
+  );
 }

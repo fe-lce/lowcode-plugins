@@ -1,5 +1,5 @@
-import { project } from '@alilc/lowcode-engine';
-import { IPublicEnumTransformStage } from '@alilc/lowcode-types';
+import { project } from '@felce/lowcode-engine';
+import { IPublicEnumTransformStage } from '@felce/lowcode-types';
 
 export const deleteHiddenTransducer = (ctx: any) => {
   return {

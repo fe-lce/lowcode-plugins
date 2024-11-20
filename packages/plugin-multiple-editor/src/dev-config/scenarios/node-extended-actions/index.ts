@@ -1,4 +1,4 @@
-import { init, plugins } from '@alilc/lowcode-engine';
+import { init, plugins } from '@felce/lowcode-engine';
 import { createFetchHandler } from '@alilc/lowcode-datasource-fetch-handler';
 
 import registerPlugins from './plugin';

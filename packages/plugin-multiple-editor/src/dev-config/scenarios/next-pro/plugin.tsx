@@ -1,26 +1,18 @@
 import React from 'react';
-import {
-  plugins,
-  skeleton,
-  project,
-  setters,
-} from '@alilc/lowcode-engine';
-import AliLowCodeEngineExt from '@alilc/lowcode-engine-ext';
+import { plugins, skeleton, project, setters } from '@felce/lowcode-engine';
+import AliLowCodeEngineExt from '@felce/lowcode-engine-ext';
 import { Button } from '@alifd/next';
-// import UndoRedoPlugin from '@alilc/lowcode-plugin-undo-redo';
-import ComponentsPane from '@alilc/lowcode-plugin-components-pane';
-import ZhEnPlugin from '@alilc/lowcode-plugin-zh-en';
-// import DataSourcePanePlugin from '@alilc/lowcode-plugin-datasource-pane';
-import SchemaPlugin from '@alilc/lowcode-plugin-schema';
+// import UndoRedoPlugin from '@felce/lowcode-plugin-undo-redo';
+import ComponentsPane from '@felce/lowcode-plugin-components-pane';
+import ZhEnPlugin from '@felce/lowcode-plugin-zh-en';
+// import DataSourcePanePlugin from '@felce/lowcode-plugin-datasource-pane';
+import SchemaPlugin from '@felcle/lowcode-plugin-schema';
 // import CodeEditor from '@alilc/lowcode-plugin-code-editor';
 import ManualPlugin from '@alilc/lowcode-plugin-manual';
-import Inject, { injectAssets } from '@alilc/lowcode-plugin-inject';
-import SimulatorResizer from '@alilc/lowcode-plugin-simulator-select';
+import Inject, { injectAssets } from '@felce/lowcode-plugin-inject';
+import SimulatorResizer from '@felce/lowcode-plugin-simulator-select';
 
 // 注册到引擎
-import TitleSetter from '@alilc/lowcode-setter-title';
-import BehaviorSetter from '../../setters/behavior-setter';
-import CustomSetter from '../../setters/custom-setter';
 import Logo from '../../sample-plugins/logo';
 import { registerRefProp } from '../../sample-plugins/set-ref-prop';
 import { deleteHiddenTransducer } from '../../sample-plugins/delete-hidden-transducer';
@@ -252,19 +244,4 @@ export default async function registerPlugins() {
   };
   previewSample.pluginName = 'previewSample';
   await plugins.register(previewSample);
-
-  const customSetter = (ctx: any) => {
-    return {
-      name: '___registerCustomSetter___',
-      async init() {
-        const { setters } = ctx;
-
-        setters.registerSetter('TitleSetter', TitleSetter);
-        setters.registerSetter('BehaviorSetter', BehaviorSetter);
-        setters.registerSetter('CustomSetter', CustomSetter);
-      },
-    };
-  };
-  customSetter.pluginName = 'customSetter';
-  await plugins.register(customSetter);
 }

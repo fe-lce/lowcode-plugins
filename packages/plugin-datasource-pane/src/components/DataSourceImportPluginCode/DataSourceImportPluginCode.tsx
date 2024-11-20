@@ -8,7 +8,7 @@ import _noop from 'lodash/noop';
 import _isArray from 'lodash/isArray';
 import _last from 'lodash/last';
 import _isPlainObject from 'lodash/isPlainObject';
-import MonacoEditor from '@alilc/lowcode-plugin-base-monaco-editor';
+import MonacoEditor from '@felce/lowcode-plugin-base-monaco-editor';
 import type { editor } from 'monaco-editor';
 import { RuntimeDataSourceConfig as DataSourceConfig } from '@alilc/lowcode-datasource-types';
 import Ajv from 'ajv';
@@ -45,8 +45,8 @@ export class DataSourceImportPluginCode extends PureComponent<
   };
 
   /* @author daifuyang
-  ** @description：修复默认panel ref没有submit方法
-  */
+   ** @description：修复默认panel ref没有submit方法
+   */
   submit = () => {
     return new Promise((resolve, reject) => {
       const { isCodeValid, code } = this.state;
@@ -86,7 +86,7 @@ export class DataSourceImportPluginCode extends PureComponent<
     return (result as DataSourceConfig[]).filter((dataSource) => {
       if (!dataSource.type) return false;
       const dataSourceType = dataSourceTypes.find(
-        (type) => type.type === dataSource.type,
+        (type) => type.type === dataSource.type
       );
       if (!dataSourceType) return false;
       // 处理下默认为空的情况，向下兼容
@@ -101,7 +101,7 @@ export class DataSourceImportPluginCode extends PureComponent<
           .getModelMarkers()
           .find((marker: editor.IMarker) => marker.owner === 'json')
       ) {
-        Message.success("检验成功，点击右上方确定完成导入！")
+        Message.success('检验成功，点击右上方确定完成导入！');
         this.setState({ isCodeValid: true });
         // const model: any = _last(this.monacoRef.getModels());
         // if (!model) return;
@@ -125,12 +125,11 @@ export class DataSourceImportPluginCode extends PureComponent<
   };
 
   /* @author daifuyang
-  ** @description：修复编辑器挂载事件
-  */
+   ** @description：修复编辑器挂载事件
+   */
   handleEditorDidMount = (editor: MonacoEditor, monaco: MonacoEditor) => {
     this.monacoRef = editor?.editor;
   };
-
 
   render() {
     const { onCancel = _noop } = this.props;

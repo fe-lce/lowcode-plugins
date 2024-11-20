@@ -5,8 +5,8 @@ import _get from 'lodash/get';
 import { connect, mapProps } from '@formily/react';
 import cn from 'classnames';
 import { generateClassName } from '../../utils/misc';
-import { Field } from '@formily/core'
-import { isJSExpression, JSExpression } from '@alilc/lowcode-types';
+import { Field } from '@formily/core';
+import { isJSExpression, JSExpression } from '@felce/lowcode-types';
 
 export interface ComponentSwitchBtnCompProps {
   className?: string;
@@ -14,7 +14,7 @@ export interface ComponentSwitchBtnCompProps {
   component: string;
   originalComponent: string;
   setComponent: (component: string) => void;
-  field: Field
+  field: Field;
 }
 
 export interface ComponentSwitchBtnCompState {
@@ -40,13 +40,13 @@ class ComponentSwitchBtnCompComp extends PureComponent<
 
     // 表单回调的时候，如果初始值是 expression，那需要切换组件
     if (isJSExpression(this.props.field.value)) {
-      this.props.setComponent('LowcodeExpression')
+      this.props.setComponent('LowcodeExpression');
       this.setState({ currentComponent: 'LowcodeExpression' });
     }
   }
 
   handleSwitch = () => {
-    const { field, setComponent } = this.props
+    const { field, setComponent } = this.props;
 
     let nextComponent = null;
     if (this.state.currentComponent === this.originalComponent) {
@@ -55,9 +55,10 @@ class ComponentSwitchBtnCompComp extends PureComponent<
       nextComponent = this.originalComponent;
     }
 
-    let nextValue: number | boolean | string | JSExpression | Array<any> = field.value
+    let nextValue: number | boolean | string | JSExpression | Array<any> =
+      field.value;
 
-    switch(nextComponent) {
+    switch (nextComponent) {
       case 'Switch':
         // expression 转 boolean
         if (isJSExpression(nextValue)) {
@@ -67,14 +68,14 @@ class ComponentSwitchBtnCompComp extends PureComponent<
       case 'NumberPicker':
         // expression 转 number
         if (isJSExpression(nextValue)) {
-          const val = +(nextValue && nextValue.value)
-          nextValue = isNaN(val) ? 0 : val
+          const val = +(nextValue && nextValue.value);
+          nextValue = isNaN(val) ? 0 : val;
         }
         break;
       case 'ArrayItems':
-         // expression 转 array
+        // expression 转 array
         if (isJSExpression(nextValue)) {
-          nextValue = []
+          nextValue = [];
         }
         break;
       case 'LowcodeExpression':
@@ -82,16 +83,16 @@ class ComponentSwitchBtnCompComp extends PureComponent<
         nextValue = {
           type: 'JSExpression',
           value: nextValue + '',
-        }
+        };
         break;
       default: // 默认 expression 转 string （Input、Select 组件走这）
         if (isJSExpression(nextValue)) {
-          nextValue = (nextValue && nextValue.value) || ''
+          nextValue = (nextValue && nextValue.value) || '';
         }
     }
 
     this.setState({ currentComponent: nextComponent! });
-    field.setValue(nextValue)
+    field.setValue(nextValue);
     setComponent?.(nextComponent!);
   };
 
@@ -118,5 +119,5 @@ export const ComponentSwitchBtn = connect(
       setComponent: field.setComponent,
       originalComponent: _get(field, 'component[0]'),
     };
-  }),
+  })
 );

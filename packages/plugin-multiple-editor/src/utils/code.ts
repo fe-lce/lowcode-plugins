@@ -1,4 +1,7 @@
-import { IPublicTypeProjectSchema, IPublicTypeRootSchema } from '@alilc/lowcode-types';
+import {
+  IPublicTypeProjectSchema,
+  IPublicTypeRootSchema,
+} from '@felce/lowcode-types';
 // @ts-ignore
 import prettier from 'prettier/esm/standalone.mjs';
 import parserBabel from 'prettier/parser-babel';
@@ -75,6 +78,9 @@ export const beautifyCSS = (input: string, options: any): string => {
 };
 
 // schema转换为CSS代码
-export const schema2CssCode = (schema: IPublicTypeProjectSchema, prettierOptions: any) => {
+export const schema2CssCode = (
+  schema: IPublicTypeProjectSchema,
+  prettierOptions: any
+) => {
   return beautifyCSS(schema.componentsTree[0]?.css || '', prettierOptions);
 };

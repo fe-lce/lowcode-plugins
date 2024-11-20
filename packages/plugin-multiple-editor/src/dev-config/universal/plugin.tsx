@@ -1,17 +1,11 @@
 import React from 'react';
-import {
-  plugins,
-  project,
-} from '@alilc/lowcode-engine';
-import AliLowCodeEngineExt from '@alilc/lowcode-engine-ext';
+import { plugins, project } from '@felce/lowcode-engine';
+import AliLowCodeEngineExt from '@felce/lowcode-engine-ext';
 import { Button } from '@alifd/next';
-import ComponentsPane from '@alilc/lowcode-plugin-components-pane';
-import Inject, { injectAssets } from '@alilc/lowcode-plugin-inject';
+import ComponentsPane from '@felce/lowcode-plugin-components-pane';
+import Inject, { injectAssets } from '@felce/lowcode-plugin-inject';
 
 // 注册到引擎
-import TitleSetter from '@alilc/lowcode-setter-title';
-import BehaviorSetter from '../setters/behavior-setter';
-import CustomSetter from '../setters/custom-setter';
 import Logo from '../sample-plugins/logo';
 import { deleteHiddenTransducer } from '../sample-plugins/delete-hidden-transducer';
 
@@ -215,19 +209,4 @@ export default async function registerPlugins() {
   };
   previewSample.pluginName = 'previewSample';
   await plugins.register(previewSample);
-
-  const customSetter = (ctx: any) => {
-    return {
-      name: '___registerCustomSetter___',
-      async init() {
-        const { setters } = ctx;
-
-        setters.registerSetter('TitleSetter', TitleSetter);
-        setters.registerSetter('BehaviorSetter', BehaviorSetter);
-        setters.registerSetter('CustomSetter', CustomSetter);
-      },
-    };
-  };
-  customSetter.pluginName = 'customSetter';
-  await plugins.register(customSetter);
 }

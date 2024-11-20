@@ -1,18 +1,33 @@
 import React, { PureComponent } from 'react';
-import MonacoEditor from '@alilc/lowcode-plugin-base-monaco-editor';
+import MonacoEditor from '@felce/lowcode-plugin-base-monaco-editor';
 import { Tab, Button, Dialog } from '@alifd/next';
 import { ErrorTip } from '../ErrorTip';
 
 import { defaultBabelConfig, defaultCode, WORDS, TAB_KEY } from '../../config';
-import { transformJS, transformAst, stateParser, getMethods } from '../../utils';
+import {
+  transformJS,
+  transformAst,
+  stateParser,
+  getMethods,
+} from '../../utils';
 
 import { FunctionEventParams } from '../../types';
-import { IEditorInstance, IMonacoInstance } from '@alilc/lowcode-plugin-base-monaco-editor/lib/helper';
+import {
+  IEditorInstance,
+  IMonacoInstance,
+} from '@felce/lowcode-plugin-base-monaco-editor/lib/helper';
 
 import './JsEditor.less';
 
 const LIFECYCLES_FUNCTION_MAP = {
-  react: ['constructor', 'render', 'componentDidMount', 'componentDidUpdate', 'componentWillUnmount', 'componentDidCatch'],
+  react: [
+    'constructor',
+    'render',
+    'componentDidMount',
+    'componentDidUpdate',
+    'componentWillUnmount',
+    'componentDidCatch',
+  ],
 };
 
 interface JsEditorProps {
@@ -30,7 +45,7 @@ interface JsEditorState {
   errorLocation?: {
     line: number;
     column: number;
-  }
+  };
 }
 
 export class JsEditor extends PureComponent<JsEditorProps, JsEditorState> {
@@ -106,31 +121,38 @@ export class JsEditor extends PureComponent<JsEditorProps, JsEditorState> {
       noEmit: true,
       esModuleInterop: true,
       jsx: monaco.languages.typescript.JsxEmit.React,
-      reactNamespace: "React",
+      reactNamespace: 'React',
       allowJs: true,
-      typeRoots: ["node_modules/@types"],  
+      typeRoots: ['node_modules/@types'],
     });
 
     // 将 babel 报错提示在这里
     this.disposeProvider?.dispose?.();
-    this.disposeProvider = monaco.languages.registerHoverProvider('javascript', {
-      provideHover: (model: any, position: any) => {
-        if (this.state.errorLocation?.line === position.lineNumber) {
-          return {
-            range: new monaco.Range(
-              position.lineNumber,
-              this.state.errorLocation?.column,
-              position.lineNumber,
-              (this.state.errorLocation?.column ?? 0) + 1
-            ),
-            contents: [
-              { value: `**${this.state.errorInfo}**`, supportHtml: true, isTrusted: true },
-            ]
-          };
-        }
-        return null;
+    this.disposeProvider = monaco.languages.registerHoverProvider(
+      'javascript',
+      {
+        provideHover: (model: any, position: any) => {
+          if (this.state.errorLocation?.line === position.lineNumber) {
+            return {
+              range: new monaco.Range(
+                position.lineNumber,
+                this.state.errorLocation?.column,
+                position.lineNumber,
+                (this.state.errorLocation?.column ?? 0) + 1
+              ),
+              contents: [
+                {
+                  value: `**${this.state.errorInfo}**`,
+                  supportHtml: true,
+                  isTrusted: true,
+                },
+              ],
+            };
+          }
+          return null;
+        },
       }
-    });
+    );
 
     // monaco.languages.typescript.typescriptDefaults.addExtraLib(
     //   ReactType,
@@ -152,15 +174,17 @@ export class JsEditor extends PureComponent<JsEditorProps, JsEditorState> {
       `,
       `ts:/component.tsx`
     );
-
   }
 
   focusByFunctionName({ functionName }: FunctionEventParams) {
     const { monacoEditor } = this;
     const matchedResult = monacoEditor
       ?.getModel()
-      ?.findMatches(`^\\s*(?:async)?\\s*${functionName}\\s*\\([\\s\\S]*\\)[\\s\\S]*\\{`, false, true)
-      ?.[0];
+      ?.findMatches(
+        `^\\s*(?:async)?\\s*${functionName}\\s*\\([\\s\\S]*\\)[\\s\\S]*\\{`,
+        false,
+        true
+      )?.[0];
     if (matchedResult) {
       setTimeout(() => {
         monacoEditor.revealLineInCenter(matchedResult.range.startLineNumber);
@@ -181,18 +205,29 @@ export class JsEditor extends PureComponent<JsEditorProps, JsEditorState> {
 
     // 找到最后一个 }，在他前面插入新的 function 字符串
     const matches = monacoEditor.getModel()?.findMatches('}');
-    let range = {}
-    if(matches && matches.length > 0) {
-      const { startLineNumber, startColumn } = matches[matches.length - 1]?.range || {}
-      range = new monaco.Range(startLineNumber, startColumn, startLineNumber, startColumn);
+    let range = {};
+    if (matches && matches.length > 0) {
+      const { startLineNumber, startColumn } =
+        matches[matches.length - 1]?.range || {};
+      range = new monaco.Range(
+        startLineNumber,
+        startColumn,
+        startLineNumber,
+        startColumn
+      );
     }
 
-    const functionCode = params.template ?
-      params.template :
-      `\n\t${params.functionName}(){\n\t}\n`;
+    const functionCode = params.template
+      ? params.template
+      : `\n\t${params.functionName}(){\n\t}\n`;
 
     monacoEditor.executeEdits('log-source', [
-      { identifier: 'event_id', range, text: functionCode, forceMoveMarkers: true },
+      {
+        identifier: 'event_id',
+        range,
+        text: functionCode,
+        forceMoveMarkers: true,
+      },
     ]);
 
     params.functionName && this.focusByFunctionName(params);
@@ -203,19 +238,15 @@ export class JsEditor extends PureComponent<JsEditorProps, JsEditorState> {
     const { jsCode, currentTab, onTabChange } = this.props;
     return (
       <>
-        <Tab
-          size="small"
-          shape="wrapped"
-          activeKey={currentTab}
-        >
+        <Tab size="small" shape="wrapped" activeKey={currentTab}>
           <Tab.Item
             className={hasError ? 'tab-with-error' : ''}
-            title={(
+            title={
               <>
                 {code !== jsCode ? '* ' : ''}
                 index.js
               </>
-            )}
+            }
             key={TAB_KEY.JS}
             onClick={() => onTabChange(TAB_KEY.JS)}
           />
@@ -229,17 +260,15 @@ export class JsEditor extends PureComponent<JsEditorProps, JsEditorState> {
               height="100%"
               supportFullScreen={true}
               onChange={(newCode: string) => {
-                this._updateCode(newCode)
+                this._updateCode(newCode);
               }}
               editorDidMount={(monaco, editor) => {
                 this.editorDidMount(monaco, editor);
               }}
             />
-            {
-              hasError && typeof errorInfo === 'string' ? (
-                <ErrorTip errorInfo={errorInfo} />
-              ) : null
-            }
+            {hasError && typeof errorInfo === 'string' ? (
+              <ErrorTip errorInfo={errorInfo} />
+            ) : null}
           </div>
         )}
       </>
@@ -247,7 +276,10 @@ export class JsEditor extends PureComponent<JsEditorProps, JsEditorState> {
   }
 
   _updateCode(newCode: string) {
-    const { hasError, errorInfo, errorLocation } = transformJS(newCode, defaultBabelConfig);
+    const { hasError, errorInfo, errorLocation } = transformJS(
+      newCode,
+      defaultBabelConfig
+    );
     const { monacoEditor, monaco } = this;
 
     if (!monacoEditor || !monaco) {
@@ -259,10 +291,7 @@ export class JsEditor extends PureComponent<JsEditorProps, JsEditorState> {
       // monacoEditor.setPosition(pos);
       // update error decorations
       if (this.lastErrorDecoration) {
-        monacoEditor.deltaDecorations(
-          this.lastErrorDecoration,
-          []
-        );
+        monacoEditor.deltaDecorations(this.lastErrorDecoration, []);
         this.lastErrorDecoration = null;
       }
 
@@ -272,27 +301,31 @@ export class JsEditor extends PureComponent<JsEditorProps, JsEditorState> {
           [
             {
               range: new monaco.Range(
-                errorLocation.line, errorLocation.column + 1,
-                errorLocation.line, errorLocation.column + 2
+                errorLocation.line,
+                errorLocation.column + 1,
+                errorLocation.line,
+                errorLocation.column + 2
               ),
               options: {
                 inlineClassName: 'squiggly-error',
               },
               minimap: {
-                color: { id: "minimap.errorHighlight" },
+                color: { id: 'minimap.errorHighlight' },
                 position: this.monaco?.editor?.MinimapPosition.Inline,
               },
             },
             {
               range: new monaco.Range(
-                errorLocation.line, errorLocation.column,
-                errorLocation.line, errorLocation.column
+                errorLocation.line,
+                errorLocation.column,
+                errorLocation.line,
+                errorLocation.column
               ),
               options: {
                 isWholeLine: true,
                 linesDecorationsClassName: 'plugin-code-editor-error-line',
-              }
-            }
+              },
+            },
           ]
         );
       }

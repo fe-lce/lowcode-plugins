@@ -14,8 +14,9 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["vite/client"]
   },
-  "include": ["src/*.ts", "src/*.tsx"],
-  "exclude": ["node_modules", "build", "public"]
+  "exclude": ["node_modules", "build", "public"],
+  "include": ["./src"]
 }

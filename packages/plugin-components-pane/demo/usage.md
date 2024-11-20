@@ -5,11 +5,11 @@ order: 1
 
 用法
 
-````jsx
+```jsx
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Icon } from '@alifd/next';
-import ComponentPane, { PaneIcon } from '@alilc/lowcode-plugin-components-pane';
+import ComponentPane, { PaneIcon } from '@felce/lowcode-plugin-components-pane';
 import './index.scss';
 
 const packages = [
@@ -19,7 +19,7 @@ const packages = [
   },
   { package: 'react', version: '16.5.2', urls: null, library: 'React' },
   { package: 'react-dom', version: '16.12.0', urls: null, library: 'ReactDOM' },
-  { package: 'prop-types', version: '15.6.2', urls: null, library: 'PropTypes' }
+  { package: 'prop-types', version: '15.6.2', urls: null, library: 'PropTypes' },
 ];
 
 class App extends Component {
@@ -48,7 +48,7 @@ class App extends Component {
     });
     VisualEngine.Pages.addPage({
       id: 'test',
-      componentsTree: []
+      componentsTree: [],
     });
   }
   render() {
@@ -59,4 +59,4 @@ class App extends Component {
 }
 
 ReactDOM.render(<App />, mountNode);
-````
+```

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { common, project, config, event } from '@alilc/lowcode-engine';
+import { common, project, config, event } from '@felce/lowcode-engine';
 import { Loading, Box } from '@alifd/next';
 
 import { default as BlockCard } from '../card';
@@ -10,7 +10,8 @@ import './index.scss';
 
 const { useState, useEffect } = React;
 
-const DEFAULT_SCREENSHOT = 'https://tianshu.alicdn.com/19307bb5-2881-44ad-82d3-f92e2f44aabb.png';
+const DEFAULT_SCREENSHOT =
+  'https://tianshu.alicdn.com/19307bb5-2881-44ad-82d3-f92e2f44aabb.png';
 
 function checkBlockAPI() {
   const apiList = config.get('apiList') || {};
@@ -23,9 +24,7 @@ function checkBlockAPI() {
   return blockAPI;
 }
 
-export interface Block {
-
-}
+export interface Block {}
 
 export interface BlockResponse {
   code: number;
@@ -37,12 +36,12 @@ export interface BlockPaneAPI {
 }
 
 export interface BlockPaneProps {
-  api: BlockPaneAPI
+  api: BlockPaneAPI;
 }
 
 export const BlockPane = (props: BlockPaneProps) => {
   const { listBlocks } = checkBlockAPI();
-  const [ blocks, setBlocks ] = useState();
+  const [blocks, setBlocks] = useState();
   useEffect(() => {
     const fetchBlocks = async () => {
       const res = await listBlocks();
@@ -51,9 +50,8 @@ export const BlockPane = (props: BlockPaneProps) => {
     };
     event.on('common:BlockChanged', () => {
       fetchBlocks();
-    })
+    });
     fetchBlocks();
-
   }, []);
 
   const registerAdditive = (shell: HTMLDivElement | null) => {
@@ -76,7 +74,7 @@ export const BlockPane = (props: BlockPaneProps) => {
       return null;
     }
 
-    const _dragon = common.designerCabin.dragon
+    const _dragon = common.designerCabin.dragon;
     console.log('_dragon: ', _dragon);
     if (!_dragon) {
       return;
@@ -110,15 +108,26 @@ export const BlockPane = (props: BlockPaneProps) => {
   };
 
   if (!blocks?.length) {
-    return <div className='block-pane-loading'><Loading /></div>
+    return (
+      <div className="block-pane-loading">
+        <Loading />
+      </div>
+    );
   }
 
-  return <div className='block-pane' ref={registerAdditive}><Box direction='row' wrap>
-      {
-        blocks.map(item => <BlockCard id={item.id} title={item.title} screenshot={item.screenshot || DEFAULT_SCREENSHOT} />)
-      }
-    </Box>
-    </div>;
-} 
+  return (
+    <div className="block-pane" ref={registerAdditive}>
+      <Box direction="row" wrap>
+        {blocks.map((item) => (
+          <BlockCard
+            id={item.id}
+            title={item.title}
+            screenshot={item.screenshot || DEFAULT_SCREENSHOT}
+          />
+        ))}
+      </Box>
+    </div>
+  );
+};
 
 export default BlockPane;

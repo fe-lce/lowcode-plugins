@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Select } from '@alifd/next';
-import { common } from '@alilc/lowcode-engine';
+import { common } from '@felce/lowcode-engine';
 
 interface Color {
   rgb: any;
@@ -28,7 +28,9 @@ export default class ClassNameView extends PureComponent<PluginProps> {
 
   getClassNameList = () => {
     const { project } = this.context;
-    const schema = project.exportSchema(common.designerCabin.TransformStage.Save);
+    const schema = project.exportSchema(
+      common.designerCabin.TransformStage.Save
+    );
     const { css } = schema.componentsTree[0];
     const classNameList = [];
     const re = /\.?\w+[^{]+\{[^}]*\}/g;
@@ -44,7 +46,6 @@ export default class ClassNameView extends PureComponent<PluginProps> {
 
     return classNameList;
   };
-
 
   handleChange = (value) => {
     const { onChange } = this.props;
@@ -68,12 +69,10 @@ export default class ClassNameView extends PureComponent<PluginProps> {
       return item;
     });
 
-
     let selectValue = [];
     if (value && value !== '') {
       selectValue = value.split(' ');
     }
-
 
     this.setState({
       dataSource,
@@ -81,11 +80,16 @@ export default class ClassNameView extends PureComponent<PluginProps> {
     });
   }
 
-
   render() {
     const { dataSource, selectValue } = this.state;
     return (
-      <Select aria-label="tag mode" mode="tag" dataSource={dataSource} onChange={this.handleChange} value={selectValue} />
+      <Select
+        aria-label="tag mode"
+        mode="tag"
+        dataSource={dataSource}
+        onChange={this.handleChange}
+        value={selectValue}
+      />
     );
   }
 }

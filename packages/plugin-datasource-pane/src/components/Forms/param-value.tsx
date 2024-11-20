@@ -10,7 +10,7 @@ import {
   Switch,
 } from '@alifd/next';
 import { connect } from '@formily/react';
-import { JSExpression, isJSExpression } from '@alilc/lowcode-types';
+import { JSExpression, isJSExpression } from '@felce/lowcode-types';
 import _isPlainObject from 'lodash/isPlainObject';
 import _isArray from 'lodash/isArray';
 import _isNumber from 'lodash/isNumber';
@@ -24,11 +24,11 @@ import './param-value.scss';
 const { Group: RadioGroup } = Radio;
 
 enum ParamValueEnum {
-  STRING ='string',
-  NUMBER ='number',
-  BOOLEAN ='boolean',
-  EXPRSSION ='expression',
-  JSON ='json',
+  STRING = 'string',
+  NUMBER = 'number',
+  BOOLEAN = 'boolean',
+  EXPRSSION = 'expression',
+  JSON = 'json',
   JSONSTRING = 'jsonstring',
 }
 
@@ -135,7 +135,10 @@ class ParamValueComp extends PureComponent<ParamValueProps, ParamValueState> {
         break;
       case ParamValueEnum.BOOLEAN:
         if (isBoolean(nextValue)) {
-          nextValue = nextValue === 'true' || (nextValue && nextValue.value === 'true') || false;
+          nextValue =
+            nextValue === 'true' ||
+            (nextValue && nextValue.value === 'true') ||
+            false;
         }
         break;
       case ParamValueEnum.JSONSTRING:
@@ -264,14 +267,18 @@ class ParamValueComp extends PureComponent<ParamValueProps, ParamValueState> {
         )}
         {type === 'json' && (
           <span className={generateClassName('universal-value-json')}>
-            <JSONComp onChange={this.handleChange} value={value as Record<string, any>} />
+            <JSONComp
+              onChange={this.handleChange}
+              value={value as Record<string, any>}
+            />
           </span>
         )}
         {type === 'expression' && (
           <span className={generateClassName('universal-value-json')}>
             <EditorContext.Consumer>
               {({ setters }) => {
-                const ExpressionSetter = setters?.getSetter('ExpressionSetter').component;
+                const ExpressionSetter =
+                  setters?.getSetter('ExpressionSetter').component;
                 if (!ExpressionSetter) return null;
                 return (
                   <ExpressionSetter

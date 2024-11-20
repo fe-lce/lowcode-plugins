@@ -1,11 +1,15 @@
-import { TransformedComponentMetadata, FieldConfig } from '@alilc/lowcode-types';
+import {
+  TransformedComponentMetadata,
+  FieldConfig,
+} from '@felce/lowcode-types';
 import { v4 as uuidv4 } from 'uuid';
-import { material } from '@alilc/lowcode-engine';
+import { material } from '@felce/lowcode-engine';
 
 function addonCombine(metadata: TransformedComponentMetadata) {
   const { componentName, configure = {} } = metadata;
 
-  const isRoot: boolean = componentName === 'Page' || componentName === 'Component';
+  const isRoot: boolean =
+    componentName === 'Page' || componentName === 'Component';
 
   if (isRoot) {
     return metadata;
@@ -37,15 +41,13 @@ function addonCombine(metadata: TransformedComponentMetadata) {
     configure.combined = [];
   }
 
-  advancedGroup = configure.combined?.filter(d => d.name === '#advanced')[0];
+  advancedGroup = configure.combined?.filter((d) => d.name === '#advanced')[0];
 
   if (!advancedGroup) {
     advancedGroup = {
       name: '#advanced',
       title: { type: 'i18n', 'zh-CN': '高级', 'en-US': 'Advanced' },
-      items: [
-        refItem,
-      ],
+      items: [refItem],
     };
 
     configure.combined.push(advancedGroup);
@@ -57,7 +59,11 @@ function addonCombine(metadata: TransformedComponentMetadata) {
 
   const advanceItems: FieldConfig[] = advancedGroup.items || [];
 
-  if (!advanceItems || !advanceItems.length || !advanceItems?.filter(d => d.name === 'ref').length) {
+  if (
+    !advanceItems ||
+    !advanceItems.length ||
+    !advanceItems?.filter((d) => d.name === 'ref').length
+  ) {
     advanceItems.push(refItem);
   }
 
@@ -70,7 +76,11 @@ function addonCombine(metadata: TransformedComponentMetadata) {
 const SetRefPropPlugin = () => {
   return {
     init() {
-      material.registerMetadataTransducer(addonCombine, 110, 'register-ref-prop');
+      material.registerMetadataTransducer(
+        addonCombine,
+        110,
+        'register-ref-prop'
+      );
     },
   };
 };

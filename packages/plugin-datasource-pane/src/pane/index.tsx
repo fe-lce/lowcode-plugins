@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Message, Button } from '@alifd/next';
-import { InterpretDataSourceConfig } from '@alilc/lowcode-types';
-import { Project, Event, Setters } from '@alilc/lowcode-shell';
+import { InterpretDataSourceConfig } from '@felce/lowcode-types';
+import { Project, Event, Setters } from '@felce/lowcode-shell';
 import Logger from 'zen-logger';
 import _get from 'lodash/get';
 import _set from 'lodash/set';
@@ -26,7 +26,7 @@ import { isSchemaValid, correctSchema } from '../utils/schema';
 import { createStateService } from '../utils/stateMachine';
 import { DataSourcePaneContext } from '../utils/panel-context';
 import { mergeTwoObjectListByKey } from '../utils/misc';
-import { common } from '@alilc/lowcode-engine';
+import { common } from '@felce/lowcode-engine';
 
 import './index.scss';
 
@@ -122,7 +122,9 @@ export default class DataSourcePanePlugin extends PureComponent<
   handleSchemaChange = (schema: DataSource) => {
     const { project, onSchemaChange } = this.props;
     if (project) {
-      const docSchema = project.exportSchema(common.designerCabin.TransformStage.Save);
+      const docSchema = project.exportSchema(
+        common.designerCabin.TransformStage.Save
+      );
       if (!_isEmpty(docSchema)) {
         _set(docSchema, 'componentsTree[0].dataSource', schema);
         project.importSchema(docSchema);
@@ -151,7 +153,8 @@ export default class DataSourcePanePlugin extends PureComponent<
 
     if (!active) return null;
 
-    const projectSchema = project.exportSchema(common.designerCabin.TransformStage.Save) ?? {};
+    const projectSchema =
+      project.exportSchema(common.designerCabin.TransformStage.Save) ?? {};
     let schema = defaultSchema;
     if (_isFunction(defaultSchema)) {
       schema = defaultSchema();
@@ -177,18 +180,22 @@ export default class DataSourcePanePlugin extends PureComponent<
               onReset={this.handleReset}
               resetKeys={[panelKey]}
             >
-              { /* @ts-ignore */ }
+              {/* @ts-ignore */}
               <DataSourcePane
                 key={panelKey + 1}
                 importPlugins={mergeTwoObjectListByKey(
-                  BUILTIN_IMPORT_PLUGINS as unknown as Array<Record<string, unknown>>,
+                  BUILTIN_IMPORT_PLUGINS as unknown as Array<
+                    Record<string, unknown>
+                  >,
                   importPlugins as unknown as Array<Record<string, unknown>>,
-                  'name',
+                  'name'
                 )}
                 exportPlugins={mergeTwoObjectListByKey(
-                  BUILTIN_IMPORT_PLUGINS as unknown as Array<Record<string, unknown>>,
+                  BUILTIN_IMPORT_PLUGINS as unknown as Array<
+                    Record<string, unknown>
+                  >,
                   exportPlugins as unknown as Array<Record<string, unknown>>,
-                  'name',
+                  'name'
                 )}
                 dataSourceTypes={dataSourceTypes}
                 initialSchema={schema}

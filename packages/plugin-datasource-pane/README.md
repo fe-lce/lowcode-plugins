@@ -46,7 +46,7 @@ import {
   DataSourceTypeFetch,
   DataSourceTypeJsonp,
   DataSourceTypeMtop,
-} from '@alilc/lowcode-plugin-datasource-pane';
+} from '@felce/lowcode-plugin-datasource-pane';
 ```
 
 ## 如何定制
@@ -91,7 +91,8 @@ type DataSourceType = {
 
 ### 导入组件示例
 
-导入组件引入方式参考 pluginProps 
+导入组件引入方式参考 pluginProps
+
 ```
 import { DataSourceImportPluginTest } from './DataSourceImportPluginTest';
 
@@ -180,13 +181,10 @@ export class DataSourceImportPluginCode extends PureComponent<
 ```
 
 具体的 component 可参考 DataSourceImportPluginCode
- [查看](https://github.com/alibaba/lowcode-plugins/blob/main/packages/plugin-datasource-pane/src/components/DataSourceImportPluginCode/DataSourceImportPluginCode.tsx)
+[查看](https://github.com/fe-lce/lowcode-plugins/blob/main/packages/plugin-datasource-pane/src/components/DataSourceImportPluginCode/DataSourceImportPluginCode.tsx)
 
- demo 截图
- ![Alt](https://user-images.githubusercontent.com/14235113/186659341-dff511e8-f032-423c-8be7-e0cc281f3964.png)
-
-
-
+demo 截图
+![Alt](https://user-images.githubusercontent.com/14235113/186659341-dff511e8-f032-423c-8be7-e0cc281f3964.png)
 
 ## 定制导出插件
 
@@ -196,19 +194,18 @@ WIP
 
 # 依赖
 
-* formily v2
-* xstate
-* manaco
-* react-dnd
-
+- formily v2
+- xstate
+- manaco
+- react-dnd
 
 # 和之前版本的区别
 
-* 支持导出并自定义导出插件
-* 支持排序
-* 支持信息标签
-* 体验更好的对象参数编辑
-* 支持字段配置表达式
+- 支持导出并自定义导出插件
+- 支持排序
+- 支持信息标签
+- 体验更好的对象参数编辑
+- 支持字段配置表达式
 
 # 贡献代码
 
@@ -216,11 +213,10 @@ WIP
 
 # 未来计划
 
-* 详情页下钻
-* 支持多语言处理
-* 单元测试
-
+- 详情页下钻
+- 支持多语言处理
+- 单元测试
 
 # 参考
 
-* [搭建协议规范](https://lowcode-engine.cn/lowcode)
+- [搭建协议规范](https://lowcode-engine.cn/lowcode)

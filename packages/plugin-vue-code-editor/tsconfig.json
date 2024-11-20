@@ -1,9 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "lib"
+    "types": ["vite/client"]
   },
-  "include": [
-    "./src/"
-  ]
+  "include": ["./src"]
 }

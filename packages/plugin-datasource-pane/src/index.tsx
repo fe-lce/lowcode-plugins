@@ -1,10 +1,7 @@
 import DataSourcePanePlugin from './pane';
 
-import {
-  DataSourcePaneImportPlugin,
-  DataSourceType,
-} from './types';
-import { IPublicModelPluginContext } from '@alilc/lowcode-types';
+import { DataSourcePaneImportPlugin, DataSourceType } from './types';
+import { IPublicModelPluginContext } from '@felce/lowcode-types';
 
 export interface Options {
   importPlugins?: DataSourcePaneImportPlugin[];
@@ -25,8 +22,12 @@ const plugin = (ctx: IPublicModelPluginContext, options: Options) => {
     },
     // 插件的初始化函数，在引擎初始化之后会立刻调用
     init() {
-      const dataSourceTypes = ctx.preference.getPreferenceValue('dataSourceTypes') || options.dataSourceTypes;
-      const importPlugins = ctx.preference.getPreferenceValue('importPlugins') || options.importPlugins;
+      const dataSourceTypes =
+        ctx.preference.getPreferenceValue('dataSourceTypes') ||
+        options.dataSourceTypes;
+      const importPlugins =
+        ctx.preference.getPreferenceValue('importPlugins') ||
+        options.importPlugins;
       const schemaDock = ctx.skeleton.add({
         area: 'leftArea',
         name: 'dataSourcePane',
@@ -62,15 +63,18 @@ plugin.pluginName = 'DataSourcePane';
 plugin.meta = {
   preferenceDeclaration: {
     title: '数据源面板插件参数定义',
-    properties: [{
-      key: 'importPlugins',
-      type: 'array',
-      description: '',
-    }, {
-      key: 'dataSourceTypes',
-      type: 'array',
-      description: '数据源类型',
-    }],
+    properties: [
+      {
+        key: 'importPlugins',
+        type: 'array',
+        description: '',
+      },
+      {
+        key: 'dataSourceTypes',
+        type: 'array',
+        description: '数据源类型',
+      },
+    ],
   },
 };
 

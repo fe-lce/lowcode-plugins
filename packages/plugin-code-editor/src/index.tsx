@@ -1,7 +1,7 @@
 import { CodeEditorPane } from './pane';
-import { project } from '@alilc/lowcode-engine';
+import { project } from '@felce/lowcode-engine';
 import icon from './icon';
-import { IPublicModelPluginContext } from '@alilc/lowcode-types';
+import { IPublicModelPluginContext } from '@felce/lowcode-types';
 
 const plugin = (ctx: IPublicModelPluginContext) => {
   return {

@@ -12,7 +12,7 @@ import _pick from 'lodash/pick';
 import { JSFunction } from './jsFunction';
 import { RemoveBtn } from './form-lazy-obj-remove-btn';
 import { generateClassName } from '../../utils/misc';
-import { isJSFunction } from '@alilc/lowcode-types';
+import { isJSFunction } from '@felce/lowcode-types';
 
 const { Item: MenuButtonItem } = MenuButton;
 
@@ -30,9 +30,9 @@ export const FormLazyObj = observer((props: FormLazyObjProps) => {
 
   const [selectedProperties, setSelectedProperties] = useState<string[]>(() => {
     // 自动回填数据处理函数
-    return Object.keys(schema.properties || {}).filter(property => {
-      return isJSFunction(field.form.values[property])
-    })
+    return Object.keys(schema.properties || {}).filter((property) => {
+      return isJSFunction(field.form.values[property]);
+    });
   });
 
   const properties = useMemo(() => {
@@ -45,18 +45,26 @@ export const FormLazyObj = observer((props: FormLazyObjProps) => {
   }, [schema, selectedProperties]);
 
   const handleAdd = useCallback((propertyKey) => {
-    setSelectedProperties((selectedProperties) => selectedProperties.concat(propertyKey));
+    setSelectedProperties((selectedProperties) =>
+      selectedProperties.concat(propertyKey)
+    );
   }, []);
 
   /* 改成formily内部支持 */
-  const handleRemove = useCallback((propertyKey) => {
-    field?.form?.query(propertyKey)?.take()?.setState((state) => {
-      state.visible = !state.visible;
-    });
-    // setSelectedProperties((selectedProperties) =>
-    //   selectedProperties.filter((i) => i !== propertyKey)
-    // );
-  }, [field]);
+  const handleRemove = useCallback(
+    (propertyKey) => {
+      field?.form
+        ?.query(propertyKey)
+        ?.take()
+        ?.setState((state) => {
+          state.visible = !state.visible;
+        });
+      // setSelectedProperties((selectedProperties) =>
+      //   selectedProperties.filter((i) => i !== propertyKey)
+      // );
+    },
+    [field]
+  );
 
   const addition = useMemo(() => {
     if (properties.length === 0) return null;

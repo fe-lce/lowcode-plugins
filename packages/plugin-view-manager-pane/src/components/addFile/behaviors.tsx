@@ -1,5 +1,8 @@
 import React from 'react';
-import { IPublicModelPluginContext, IPublicModelResource } from '@alilc/lowcode-types';
+import {
+  IPublicModelPluginContext,
+  IPublicModelResource,
+} from '@felce/lowcode-types';
 import { OthersIcon } from '../resourceTree/icon';
 import { IOptions } from '../..';
 
@@ -9,8 +12,14 @@ export function Behaviors(props: {
   options: IOptions;
   safeNode: any;
 }) {
-  const menus = (props.options?.resourceContextMenuActions?.(props.pluginContext, props.resource) || []).filter(d => !d.condition || d.condition && d.condition());
-  const ContextMenu = props.pluginContext.commonUI?.ContextMenu || React.Fragment;
+  const menus = (
+    props.options?.resourceContextMenuActions?.(
+      props.pluginContext,
+      props.resource
+    ) || []
+  ).filter((d) => !d.condition || (d.condition && d.condition()));
+  const ContextMenu =
+    props.pluginContext.commonUI?.ContextMenu || React.Fragment;
 
   if (!menus.length) {
     return null;

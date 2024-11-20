@@ -1,4 +1,4 @@
-import { IPublicModelPluginContext } from '@alilc/lowcode-types';
+import { IPublicModelPluginContext } from '@felce/lowcode-types';
 import { IconQuestion } from './icon';
 
 const PluginManual = (ctx: IPublicModelPluginContext) => {
@@ -14,7 +14,12 @@ const PluginManual = (ctx: IPublicModelPluginContext) => {
           icon: IconQuestion,
           description: '如何使用',
           onClick() {
-            window.open('https://lowcode-engine.cn/site/docs/demoUsage/intro', '_blank').focus();
+            window
+              .open(
+                'https://lowcode-engine.cn/site/docs/demoUsage/intro',
+                '_blank'
+              )
+              .focus();
           },
         },
       });

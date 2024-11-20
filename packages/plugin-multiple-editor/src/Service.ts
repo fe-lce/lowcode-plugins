@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { EditorController, HookHandleFn } from './Controller';
 import { EditorHook } from './EditorHook';
-import type {IPublicApiSkeleton} from '@alilc/lowcode-types';
+import type { IPublicApiSkeleton } from '@felce/lowcode-types';
 import { Monaco } from './types';
 
 export enum PluginHooks {
@@ -43,7 +43,10 @@ export class Service extends EditorHook {
 
   actionMap: Array<PluginAction>;
 
-  constructor(public controller: EditorController, private skeleton: IPublicApiSkeleton) {
+  constructor(
+    public controller: EditorController,
+    private skeleton: IPublicApiSkeleton
+  ) {
     super();
     this.actionMap = [];
   }

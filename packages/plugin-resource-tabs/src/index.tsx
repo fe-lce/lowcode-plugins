@@ -5,7 +5,7 @@ import {
   IPublicModelWindow,
   IPublicTypeContextMenuAction,
   IPublicTypePlugin,
-} from '@alilc/lowcode-types';
+} from '@felce/lowcode-types';
 import React from 'react';
 import { useState, useEffect, useCallback } from 'react';
 import './index.scss';
@@ -59,9 +59,15 @@ function CustomTabItem(props: {
       }
     });
   }, []);
-  const ContextMenu = props.pluginContext?.commonUI?.ContextMenu || React.Fragment;
+  const ContextMenu =
+    props.pluginContext?.commonUI?.ContextMenu || React.Fragment;
   return (
-    <ContextMenu menus={props.options?.tabContextMenuActions?.(props.pluginContext, resource) || []}>
+    <ContextMenu
+      menus={
+        props.options?.tabContextMenuActions?.(props.pluginContext, resource) ||
+        []
+      }
+    >
       <div className="next-tabs-tab-inner resource-tab-item">
         <div className="resource-tab-item-resource-icon">
           {ResourceIcon ? <ResourceIcon /> : null}
@@ -118,12 +124,7 @@ function TabsContent(props: {
   options: IOptions;
 }) {
   const { pluginContext, options } = props;
-  const {
-    onSort,
-    appKey,
-    shape,
-    tabClassName,
-  } = options;
+  const { onSort, appKey, shape, tabClassName } = options;
   const { workspace } = pluginContext;
 
   const [resourceListMap, setResourceListMap] = useState<{
@@ -201,9 +202,8 @@ function TabsContent(props: {
         return;
       }
       const value: ITabItem[] = JSON.parse(
-        localStorage.getItem(
-          '___lowcode_plugin_resource_tabs___' + appKey
-        ) || 'null'
+        localStorage.getItem('___lowcode_plugin_resource_tabs___' + appKey) ||
+          'null'
       );
       const activeValue: {
         id: string;
@@ -290,12 +290,15 @@ function Content(props: {
   pluginContext: IPublicModelPluginContext;
   options: IOptions;
 }) {
-  const ContextMenu = props.pluginContext?.commonUI?.ContextMenu || React.Fragment;
+  const ContextMenu =
+    props.pluginContext?.commonUI?.ContextMenu || React.Fragment;
   return (
-    <ContextMenu menus={props.options.contextMenuActions?.(props.pluginContext) || []}>
+    <ContextMenu
+      menus={props.options.contextMenuActions?.(props.pluginContext) || []}
+    >
       <TabsContent {...props} />
     </ContextMenu>
-  )
+  );
 }
 
 interface IOptions {
@@ -306,16 +309,21 @@ interface IOptions {
   /**
    * 右键菜单项
    */
-  contextMenuActions: (ctx: IPublicModelPluginContext) => IPublicTypeContextMenuAction[];
+  contextMenuActions: (
+    ctx: IPublicModelPluginContext
+  ) => IPublicTypeContextMenuAction[];
   /**
    * 右键 Tab 菜单项
    */
-  tabContextMenuActions: (ctx: IPublicModelPluginContext, resource: IPublicModelResource) => IPublicTypeContextMenuAction[];
+  tabContextMenuActions: (
+    ctx: IPublicModelPluginContext,
+    resource: IPublicModelResource
+  ) => IPublicTypeContextMenuAction[];
 }
 
 const resourceTabs: IPublicTypePlugin = function (
   ctx: IPublicModelPluginContext,
-  options: IOptions,
+  options: IOptions
 ) {
   const { skeleton } = ctx;
   return {
@@ -376,7 +384,7 @@ resourceTabs.meta = {
         key: 'tabContextMenuActions',
         type: 'function',
         description: '右键 Tab 菜单项',
-      }
+      },
     ],
   },
   engines: {

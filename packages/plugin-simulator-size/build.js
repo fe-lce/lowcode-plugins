@@ -5,7 +5,7 @@ module.exports = {
     'react-dom': 'ReactDOM',
     'prop-types': 'PropTypes',
     '@alifd/next': 'Next',
-    '@alilc/lowcode-engine': 'AliLowCodeEngine'
+    '@felce/lowcode-engine': 'AliLowCodeEngine',
   },
   plugins: [
     [
@@ -17,8 +17,8 @@ module.exports = {
         // 配置要打开的页面，在注入调试模式下，不配置此项的话不会打开浏览器
         // 支持直接使用官方 demo 项目：https://lowcode-engine.cn/demo/index.html
         openUrl: 'https://lowcode-engine.cn/demo/index.html?debug',
-      }
+      },
     ],
-    'build-plugin-component'
-  ]
-}
+    'build-plugin-component',
+  ],
+};

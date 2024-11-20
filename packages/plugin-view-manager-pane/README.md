@@ -5,8 +5,9 @@
 ## 使用
 
 ### 注册插件
+
 ```jsx
-import { plugins } from '@alilc/lowcode-engine';
+import { plugins } from '@felce/lowcode-engine';
 import PluginUndoRedo from '@alilc/plugin-view-manager-pane';
 
 // 注册到引擎
@@ -22,4 +23,4 @@ plugins.register(PluginUndoRedo);
 该插件依赖以下插件：
 
 | 插件名 | 包名 |
-| --- | --- |
+| ------ | ---- |

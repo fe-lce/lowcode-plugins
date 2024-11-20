@@ -39,7 +39,7 @@ function setupConfig() {
 # 使用方式
 
 ```
-import { plugins } from '@alilc/lowcode-engine';
+import { plugins } from '@felce/lowcode-engine';
 import BlockPane from '@alilc/lowcode-plugin-block';
 
 await plugins.register(BlockPane);

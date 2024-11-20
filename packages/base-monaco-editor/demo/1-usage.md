@@ -6,10 +6,10 @@ order: 1
 ```jsx
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import SingleMonacoEditorComponent from '@alilc/lowcode-plugin-base-monaco-editor';
+import SingleMonacoEditorComponent from '@felce/lowcode-plugin-base-monaco-editor';
 
 function App() {
-  const [val, setValue] = React.useState(JSON.stringify({ a: 100 }, null, 2))
+  const [val, setValue] = React.useState(JSON.stringify({ a: 100 }, null, 2));
   return (
     <div>
       <SingleMonacoEditorComponent

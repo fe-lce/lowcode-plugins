@@ -5,10 +5,9 @@
 ## Demo
 
 ```ts
-import multipleFileCodeEditorFactory from '@alilc/lowcode-plugin-multiple-editor';
+import multipleFileCodeEditorFactory from '@felce/lowcode-plugin-multiple-editor';
 
-import { PrettierPlugin } from '@alilc/lowcode-plugin-multiple-editor/es/plugins/prettier-plugin';
-
+import { PrettierPlugin } from '@felce/lowcode-plugin-multiple-editor/es/plugins/prettier-plugin';
 
 const PLUGIN_NAME = 'multiple-file-code-editor';
 // 详细参数可见 ts 类型声明
@@ -33,8 +32,8 @@ const plugin: any = multipleFileCodeEditorFactory({
 export function helloWorld() {
   console.log('hello world');
 }
-    `
-  }
+    `,
+  },
 });
 
 plugin.pluginName = PLUGIN_NAME;
@@ -46,8 +45,8 @@ await plugins.register(plugin);
 
 使用该插件时，每次保存时：
 
-1. 编译代码，生成 __initExtra 函数方法，该方法用于初始化各个方法、生命周期的真实定义
-1. 修改 constructor 函数体，函数体内执行 __initExtra，constructor 将会在渲染引擎内执行，执行完成后即可得到所有方法和生命周期的真实定义
+1. 编译代码，生成 \_\_initExtra 函数方法，该方法用于初始化各个方法、生命周期的真实定义
+1. 修改 constructor 函数体，函数体内执行 \_\_initExtra，constructor 将会在渲染引擎内执行，执行完成后即可得到所有方法和生命周期的真实定义
 1. 在 schema 上保存一个文件 Map，保存位置为 `schema.componentsTree[0]._sourceCodeMap`
 
 ## 使用注意事项
@@ -56,10 +55,11 @@ await plugins.register(plugin);
 2. 不能在 index.js 的 Class 之外进行函数、变量定义，如需定义则在其他文件内定义
 3. 不能在 index.js Class 的 state 定义中使用表达式
 4. 如需在 setter 内适用类型定义，请开启 base-editor 的单例模式，仅需在应用入口处调用如下方法即可：
-5. 如果低码项目有使用出码，则需对出码进行定制，将 _sourceCodeMap 中的文件生成到项目中，并对文件的引用进行处理，具体处理方式可自行组织
+5. 如果低码项目有使用出码，则需对出码进行定制，将 \_sourceCodeMap 中的文件生成到项目中，并对文件的引用进行处理，具体处理方式可自行组织
 
-__使用单例模式__
+**使用单例模式**
+
 ```ts
-import { configure } from '@alilc/lowcode-plugin-base-monaco-editor';
+import { configure } from '@felce/lowcode-plugin-base-monaco-editor';
 configure({ singleton: true });
 ```

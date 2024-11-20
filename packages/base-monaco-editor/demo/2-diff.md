@@ -6,15 +6,15 @@ order: 2
 ```jsx
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import LowcodePluginBaseMonacoEditor from '@alilc/lowcode-plugin-base-monaco-editor';
+import LowcodePluginBaseMonacoEditor from '@felce/lowcode-plugin-base-monaco-editor';
 
 class App extends Component {
   render() {
     return (
       <div>
         <LowcodePluginBaseMonacoEditor.MonacoDiffEditor
-          original={JSON.stringify({a: 1}, null, 2)}
-          value={JSON.stringify({b: 2}, null, 2)}
+          original={JSON.stringify({ a: 1 }, null, 2)}
+          value={JSON.stringify({ b: 2 }, null, 2)}
           height={100}
           language="json"
         />
@@ -23,7 +23,5 @@ class App extends Component {
   }
 }
 
-ReactDOM.render((
-  <App />
-), mountNode);
+ReactDOM.render(<App />, mountNode);
 ```

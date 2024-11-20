@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IPublicModelPluginContext } from '@alilc/lowcode-types';
+import { IPublicModelPluginContext } from '@felce/lowcode-types';
 import { ResourcePaneContent } from './components/resourceTree';
 import { Behaviors } from './components/addFile/behaviors';
 import { IOptions } from '.';
@@ -12,13 +12,14 @@ export function Pane(props: {
     props.options?.init?.(props.pluginContext);
   }, []);
 
-  const ContextMenu = props.pluginContext.commonUI?.ContextMenu || React.Fragment;
+  const ContextMenu =
+    props.pluginContext.commonUI?.ContextMenu || React.Fragment;
 
   return (
-    <ContextMenu menus={props.options?.contextMenuActions?.(props.pluginContext) || []}>
-      <div
-        className="workspace-view-pane"
-      >
+    <ContextMenu
+      menus={props.options?.contextMenuActions?.(props.pluginContext) || []}
+    >
+      <div className="workspace-view-pane">
         <div
           className="workspace-view-pane-content"
           onClick={(e) => {
@@ -29,7 +30,13 @@ export function Pane(props: {
             defaultExpandAll={true}
             pluginContext={props.pluginContext}
             behaviors={(behaviorsProps: any) => {
-              return <Behaviors {...behaviorsProps} pluginContext={props.pluginContext} options={props.options} />;
+              return (
+                <Behaviors
+                  {...behaviorsProps}
+                  pluginContext={props.pluginContext}
+                  options={props.options}
+                />
+              );
             }}
             options={props.options}
           />

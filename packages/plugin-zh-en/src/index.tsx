@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
-import { common } from '@alilc/lowcode-engine';
-import { IPublicModelPluginContext, PluginProps } from '@alilc/lowcode-types';
+import { common } from '@felce/lowcode-engine';
+import { IPublicModelPluginContext, PluginProps } from '@felce/lowcode-types';
 import { intl } from './locale';
 import { IconZh } from './icons/zh';
 import { IconEn } from './icons/en';
@@ -61,11 +61,11 @@ const plugin = (ctx: IPublicModelPluginContext) => {
         props: {
           align: 'bottom',
         },
-      })
+      });
     },
   };
 };
 
-plugin.pluginName = 'PluginZhEn'
+plugin.pluginName = 'PluginZhEn';
 
-export default plugin
+export default plugin;

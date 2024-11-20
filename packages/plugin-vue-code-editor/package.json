@@ -10,7 +10,7 @@
     "prepack": "vite build"
   },
   "dependencies": {
-    "@felce/lowcode-plugin-base-monaco-editor": "^1.1.2",
+    "@felce/lowcode-plugin-base-monaco-editor": "workspace:^",
     "@felce/lowcode-vue-renderer-core": "^1.6.0",
     "acorn": "^8.10.0",
     "magic-string": "^0.30.3",

@@ -1,7 +1,7 @@
 {
-  "name": "@felcle/lowcode-plugin-schema",
+  "name": "@felce/lowcode-plugin-schema",
   "author": "alvarto",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Show schema in lowcode editor",
   "files": [
     "es",
@@ -21,8 +21,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@felce/lowcode-plugin-base-monaco-editor": "^1.1.2",
     "@alifd/next": "^1.25.13",
+    "@felce/lowcode-plugin-base-monaco-editor": "workspace:^",
     "classnames": "^2.3.1",
     "lodash": "^4.17.21",
     "react": "^18.3.1",

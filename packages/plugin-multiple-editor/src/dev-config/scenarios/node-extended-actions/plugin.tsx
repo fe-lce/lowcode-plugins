@@ -12,7 +12,7 @@ import { Icon, Message, Button } from '@alifd/next';
 import ComponentsPane from '@felce/lowcode-plugin-components-pane';
 import ZhEnPlugin from '@felce/lowcode-plugin-zh-en';
 // import DataSourcePanePlugin from '@felce/lowcode-plugin-datasource-pane';
-import SchemaPlugin from '@felcle/lowcode-plugin-schema';
+import SchemaPlugin from '@felce/lowcode-plugin-schema';
 // import CodeEditor from '@alilc/lowcode-plugin-code-editor';
 import ManualPlugin from '@alilc/lowcode-plugin-manual';
 import Inject, { injectAssets } from '@felce/lowcode-plugin-inject';

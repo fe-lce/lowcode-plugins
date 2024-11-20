@@ -1,24 +1,21 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@felce/lowcode-plugin-base-monaco-editor",
-  "version": "1.1.3",
+  "version": "1.2.0",
   "description": "代码编辑组件，monaco-editor 的低代码适配封装",
   "files": [
-    "demo/",
-    "es/",
-    "lib/",
-    "build/"
+    "dist/"
   ],
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "prepublishOnly": "yarn run build",
+    "prepublishOnly": "pnpm run build",
     "eslint": "eslint --cache --ext .js,.jsx ./",
-    "eslint:fix": "yarn run eslint -- --fix",
+    "eslint:fix": "pnpm run eslint -- --fix",
     "stylelint": "stylelint \"**/*.{css,scss,less}\"",
-    "lint": "yarn run eslint && yarn run stylelint",
+    "lint": "pnpm run eslint && pnpm run stylelint",
     "f2elint-scan": "f2elint scan",
     "f2elint-fix": "f2elint fix"
   },
@@ -57,8 +54,8 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public",
-    "main": "./dist/lowcode-plugin-vue-code-editor.js",
-    "module": "./dist/lowcode-plugin-vue-code-editor.mjs",
+    "main": "./dist/lowcode-plugin-base-monaco-editor.js",
+    "module": "./dist/lowcode-plugin-base-monaco-editor.mjs",
     "typings": "./dist/index.d.ts"
   },
   "homepage": "https://unpkg.com/@felce/lowcode-plugin-base-monaco-editor@1.1.2/build/index.html",

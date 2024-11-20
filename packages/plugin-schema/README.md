@@ -1,4 +1,4 @@
-# lowcode-plugin-@felcle/lowcode-plugin-schema [![][npm-image]][npm-url]
+# @felce/lowcode-plugin-schema
 
 show lowcode schema
 查看低代码引擎 schema
@@ -13,7 +13,7 @@ show lowcode schema
 
 ```jsx
 import { plugins } from '@felce/lowcode-engine';
-import LowcodePluginAliLowcodePluginSchema from '@felcle/lowcode-plugin-schema';
+import LowcodePluginAliLowcodePluginSchema from '@felce/lowcode-plugin-schema';
 
 // 注册到引擎
 plugins.register(LowcodePluginAliLowcodePluginSchema);
@@ -23,7 +23,7 @@ plugins.register(LowcodePluginAliLowcodePluginSchema);
 
 ```jsx
 import { plugins } from '@felce/lowcode-engine';
-import LowcodePluginAliLowcodePluginSchema from '@felcle/lowcode-plugin-schema';
+import LowcodePluginAliLowcodePluginSchema from '@felce/lowcode-plugin-schema';
 
 // 注册到引擎
 plugins.register(LowcodePluginAliLowcodePluginSchema, {

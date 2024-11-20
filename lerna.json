@@ -1,18 +1,15 @@
 {
-  "lerna": "4.0.0",
+  "$schema": "https://json.schemastore.org/lerna.json",
+  "lerna": "8",
   "version": "1.0.0",
-  "npmClient": "yarn",
-  "useWorkspaces": true,
+  "npmClient": "pnpm",
   "packages": ["packages/*"],
   "command": {
-    "bootstrap": {
-      "npmClientArgs": ["--no-package-lock"]
-    },
     "version": {
       "allowBranch": ["master", "main", "release/*", "daily/*", "refactor/*"]
     },
     "publish": {
-      "npmClient": "npm",
+      "npmClient": "pnpm",
       "verifyRegistry": false,
       "verifyAccess": false,
       "ignoreChanges": ["**/*.md", "**/test/**"],

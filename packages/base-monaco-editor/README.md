@@ -17,8 +17,8 @@ BTW. Style is seperate from index.js. Use `import '@felce/lowcode-plugin-base-mo
 
 ## API
 
-| prop            | description                                                                                                                   | type annotation                                              |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | -------- |
+| prop | description | type annotation |
+| --------------- |------------------------- | ---------------- |
 | value           | value, controlled                                                                                                             | `string`                                                     |
 | defaultValue    | defaultValue for creating model, uncontrolled                                                                                 | `string`                                                     |
 | language        | language of the editor                                                                                                        | `string`                                                     |

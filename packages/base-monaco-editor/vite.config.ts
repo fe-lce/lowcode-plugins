@@ -3,21 +3,21 @@ import React from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({
+  plugins: [React({ jsxRuntime: 'classic' }), dts()],
   build: {
-    target: 'ES2018',
     lib: {
-      entry: './src/index.tsx',
-      formats: ['es', 'cjs'],
+      entry: 'src/index.ts',
+      fileName(format, entryName) {
+        return `${entryName}.${format}.js`;
+      },
+      name: 'LowCodePluginBaseMonacoEditor',
+      cssFileName: 'index',
     },
     rollupOptions: {
       output: {
-        exports: 'named'
+        exports: 'named',
       },
       external: [],
     },
   },
-  plugins: [
-    React({ jsxRuntime: 'classic' }),
-    dts()
-  ],
 });

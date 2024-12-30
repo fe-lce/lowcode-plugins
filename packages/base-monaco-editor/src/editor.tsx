@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useRef, useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import type { editor } from 'monaco-editor';
@@ -8,13 +7,18 @@ import {
   useEditor,
   IDiffMonacoEditorProps,
   INITIAL_OPTIONS,
+  noop,
 } from './helper';
 
-export * from './monaco';
-export * from './controller';
-
-const SingleMonacoEditor = (props: ISingleMonacoEditorProps) => {
-  const { onChange, enableOutline, width, height, language, supportFullScreen } = props;
+export const SingleMonacoEditor = (props: ISingleMonacoEditorProps) => {
+  const {
+    onChange,
+    enableOutline,
+    width,
+    height,
+    language,
+    supportFullScreen,
+  } = props;
   const onChangeRef = useRef(onChange);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [fullScreenStyle, setFullScreenStyle] = useState({});
@@ -35,17 +39,12 @@ const SingleMonacoEditor = (props: ISingleMonacoEditorProps) => {
     've-outline': enableOutline,
   });
 
-  const fullScreenClassName = classNames(
-    {
-      'base-monaco-full-screen-icon': !isFullScreen,
-      'base-monaco-full-screen-icon-cancel': isFullScreen,
-    },
-  );
+  const fullScreenClassName = classNames({
+    'base-monaco-full-screen-icon': !isFullScreen,
+    'base-monaco-full-screen-icon-cancel': isFullScreen,
+  });
 
-  const style = useMemo(
-    () => ({ width, height }),
-    [width, height],
-  );
+  const style = useMemo(() => ({ width, height }), [width, height]);
 
   useEffect(() => {
     onChangeRef.current = onChange;
@@ -55,13 +54,15 @@ const SingleMonacoEditor = (props: ISingleMonacoEditorProps) => {
     if (isEditorReady) {
       const editorInstance = editorRef.current;
       subscriptionRef.current?.dispose();
-      subscriptionRef.current = editorInstance?.onDidChangeModelContent((event: any) => {
-        const editorValue = editorInstance?.getModel().getValue();
+      subscriptionRef.current = editorInstance?.onDidChangeModelContent(
+        (event: any) => {
+          const editorValue = editorInstance?.getModel().getValue();
 
-        if (valueRef.current !== editorValue) {
-          onChangeRef.current?.(editorValue, event);
+          if (valueRef.current !== editorValue) {
+            onChangeRef.current?.(editorValue, event);
+          }
         }
-      });
+      );
     }
   }, [editorRef, isEditorReady, subscriptionRef, valueRef]);
 
@@ -80,7 +81,10 @@ const SingleMonacoEditor = (props: ISingleMonacoEditorProps) => {
       return;
     }
 
-    monacoRef.current?.editor.setModelLanguage((editorRef.current)?.getModel(), language);
+    monacoRef.current?.editor.setModelLanguage(
+      editorRef.current?.getModel(),
+      language
+    );
   }, [editorRef, isEditorReady, language, monacoRef]);
 
   const fullScreen = () => {
@@ -126,34 +130,37 @@ const SingleMonacoEditor = (props: ISingleMonacoEditorProps) => {
         className="react-monaco-editor-container"
         style={isFullScreen ? fullScreenStyle : style}
       >
-        {supportFullScreen && <div className={fullScreenClassName} onClick={fullScreen} />}
+        {supportFullScreen && (
+          <div className={fullScreenClassName} onClick={fullScreen} />
+        )}
       </div>
     </div>
   );
 };
 
-const DiffMonacoEditor = (props: IDiffMonacoEditorProps) => {
+export const DiffMonacoEditor = (props: IDiffMonacoEditorProps) => {
   const { enableOutline, width, height, language, original } = props;
 
-  const { isEditorReady, focused, loading, containerRef, monacoRef, editorRef } = useEditor<editor.IStandaloneDiffEditor>(
-    'diff',
-    props,
-  );
+  const {
+    isEditorReady,
+    focused,
+    loading,
+    containerRef,
+    monacoRef,
+    editorRef,
+  } = useEditor<editor.IStandaloneDiffEditor>('diff', props);
 
   const className = classNames('lc-code-control', props.className, {
     've-focused': focused,
     've-outline': enableOutline,
   });
-  const style = useMemo(
-    () => ({ width, height }),
-    [width, height],
-  );
+  const style = useMemo(() => ({ width, height }), [width, height]);
 
   useEffect(() => {
     if (!isEditorReady) {
       return;
     }
-    (editorRef.current).getModel().original.setValue(original ?? '');
+    editorRef.current.getModel().original.setValue(original ?? '');
   }, [editorRef, isEditorReady, original]);
 
   useEffect(() => {
@@ -170,7 +177,8 @@ const DiffMonacoEditor = (props: IDiffMonacoEditorProps) => {
       return;
     }
 
-    const { original: originalModel, modified: modifiedModel } = editorRef.current?.getModel();
+    const { original: originalModel, modified: modifiedModel } =
+      editorRef.current?.getModel();
 
     monacoRef.current?.editor.setModelLanguage(originalModel, language);
     monacoRef.current?.editor.setModelLanguage(modifiedModel, language);
@@ -188,7 +196,7 @@ const DiffMonacoEditor = (props: IDiffMonacoEditorProps) => {
   );
 };
 
-const DiffMonacoEditorComponent = Object.assign(DiffMonacoEditor, {
+export const DiffMonacoEditorComponent = Object.assign(DiffMonacoEditor, {
   displayName: 'DiffMonacoEditor',
   defaultProps: {
     width: '100%',
@@ -202,23 +210,3 @@ const DiffMonacoEditorComponent = Object.assign(DiffMonacoEditor, {
     requireConfig: {},
   },
 });
-
-export const SingleMonacoEditorComponent = Object.assign(SingleMonacoEditor, {
-  displayName: 'SingleMonacoEditor',
-  defaultProps: {
-    width: '100%',
-    height: 150,
-    defaultValue: '',
-    language: 'javascript',
-    options: INITIAL_OPTIONS,
-    editorDidMount: noop,
-    editorWillMount: noop,
-    onChange: noop,
-    requireConfig: {},
-  },
-  MonacoDiffEditor: DiffMonacoEditorComponent,
-});
-
-export default SingleMonacoEditorComponent;
-
-function noop() {}

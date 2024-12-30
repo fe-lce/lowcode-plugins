@@ -1,17 +1,16 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@felce/lowcode-plugin-base-monaco-editor",
-  "version": "1.2.2",
+  "version": "1.3.0-beta.0",
   "description": "代码编辑组件，monaco-editor 的低代码适配封装",
   "files": [
     "dist/"
   ],
-  "main": "src/index.tsx",
-  "module": "src/index.tsx",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "prepublishOnly": "npm version patch && pnpm run build",
     "eslint": "eslint --cache --ext .js,.jsx ./",
     "eslint:fix": "pnpm run eslint -- --fix",
     "stylelint": "stylelint \"**/*.{css,scss,less}\"",
@@ -25,18 +24,17 @@
   ],
   "dependencies": {
     "@monaco-editor/loader": "1.3.0",
-    "classnames": "^2.3.1"
-  },
-  "devDependencies": {
-    "@cfaester/enzyme-adapter-react-18": "^0.8.0",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "enzyme": "^3.11.0",
-    "f2elint": "^1.2.0",
+    "classnames": "^2.3.1",
     "monaco-editor": "^0.31.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "vite": "^5.4.11",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "f2elint": "^1.2.0",
+    "vite": "^6.0.6",
+    "@vitejs/plugin-react-swc": "3.7.1",
     "vite-plugin-dts": "^4.3.0",
     "lodash": "4.17.21"
   },
@@ -55,9 +53,16 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public",
-    "main": "./dist/lowcode-plugin-base-monaco-editor.js",
-    "module": "./dist/lowcode-plugin-base-monaco-editor.mjs",
-    "typings": "./dist/index.d.ts"
+    "main": "./dist/index.es.js",
+    "module": "./dist/index.umd.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "import": "./dist/index.es.js",
+        "require": "./dist/index.umd.js",
+        "types": "./dist/index.d.ts"
+      }
+    }
   },
   "homepage": "https://unpkg.com/@felce/lowcode-plugin-base-monaco-editor@1.1.2/build/index.html",
   "repository": {

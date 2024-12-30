@@ -1,5 +1,11 @@
 /* eslint-disable no-empty */
-import { useEffect, useState, useRef, CSSProperties, MutableRefObject } from 'react';
+import {
+  useEffect,
+  useState,
+  useRef,
+  CSSProperties,
+  MutableRefObject,
+} from 'react';
 import { Monaco } from '@monaco-editor/loader';
 import type { editor as oEditor } from 'monaco-editor';
 import { getMonaco } from './monaco';
@@ -8,10 +14,14 @@ import { getMonaco } from './monaco';
 /**
  * @see https://microsoft.github.io/monaco-editor/api/index.html
  */
-export type IEditorInstance = oEditor.IStandaloneCodeEditor | oEditor.IStandaloneDiffEditor;
+export type IEditorInstance =
+  | oEditor.IStandaloneCodeEditor
+  | oEditor.IStandaloneDiffEditor;
 
-export type EditorEnhancer =
-  (monaco: Monaco, editorIns: IEditorInstance) => any;
+export type EditorEnhancer = (
+  monaco: Monaco,
+  editorIns: IEditorInstance
+) => any;
 
 export interface IGeneralManacoEditorProps {
   /** [Monaco editor options](https://microsoft.github.io/monaco-editor/) */
@@ -57,8 +67,14 @@ export interface IDiffMonacoEditorProps extends IGeneralManacoEditorProps {
   original?: string;
 }
 
-const CURRENT_LANGUAGE = ((window as any).locale || window.localStorage.getItem('vdev-locale') || '').replace(/_/, '-') || 'zh-CN';
-export const WORD_EDITOR_INITIALIZING = CURRENT_LANGUAGE === 'en-US' ? 'Initializing Editor' : '编辑器初始化中';
+const CURRENT_LANGUAGE =
+  (
+    (window as any).locale ||
+    window.localStorage.getItem('vdev-locale') ||
+    ''
+  ).replace(/_/, '-') || 'zh-CN';
+export const WORD_EDITOR_INITIALIZING =
+  CURRENT_LANGUAGE === 'en-US' ? 'Initializing Editor' : '编辑器初始化中';
 
 export const INITIAL_OPTIONS: oEditor.IStandaloneEditorConstructionOptions = {
   fontSize: 12,
@@ -87,34 +103,47 @@ export const INITIAL_OPTIONS: oEditor.IStandaloneEditorConstructionOptions = {
   },
 };
 
-const DIFF_EDITOR_INITIAL_OPTIONS: oEditor.IStandaloneDiffEditorConstructionOptions = {
-  fontSize: 12,
-  fontFamily: 'Menlo, Monaco, Courier New, monospace',
-  folding: true,
-  minimap: {
-    enabled: false,
-  },
-  autoIndent: 'advanced',
-  contextmenu: true,
-  useTabStops: true,
-  formatOnPaste: true,
-  automaticLayout: true,
-  lineNumbers: 'on',
-  wordWrap: 'off',
-  scrollBeyondLastLine: false,
-  fixedOverflowWidgets: false,
-  snippetSuggestions: 'top',
-  scrollbar: {
-    vertical: 'auto',
-    horizontal: 'auto',
-    verticalScrollbarSize: 10,
-    horizontalScrollbarSize: 10,
-  },
-};
+const DIFF_EDITOR_INITIAL_OPTIONS: oEditor.IStandaloneDiffEditorConstructionOptions =
+  {
+    fontSize: 12,
+    fontFamily: 'Menlo, Monaco, Courier New, monospace',
+    folding: true,
+    minimap: {
+      enabled: false,
+    },
+    autoIndent: 'advanced',
+    contextmenu: true,
+    useTabStops: true,
+    formatOnPaste: true,
+    automaticLayout: true,
+    lineNumbers: 'on',
+    wordWrap: 'off',
+    scrollBeyondLastLine: false,
+    fixedOverflowWidgets: false,
+    snippetSuggestions: 'top',
+    scrollbar: {
+      vertical: 'auto',
+      horizontal: 'auto',
+      verticalScrollbarSize: 10,
+      horizontalScrollbarSize: 10,
+    },
+  };
 
-export const useEditor = <T = IEditorInstance>(type: 'single' | 'diff', props: IGeneralManacoEditorProps) => {
+export const useEditor = <T = IEditorInstance>(
+  type: 'single' | 'diff',
+  props: IGeneralManacoEditorProps
+) => {
   const {
-    editorDidMount, editorWillMount, theme, value, path, language, saveViewState, defaultValue, enhancers, overrideServices
+    editorDidMount,
+    editorWillMount,
+    theme,
+    value,
+    path,
+    language,
+    saveViewState,
+    defaultValue,
+    enhancers,
+    overrideServices,
   } = props;
 
   const [isEditorReady, setIsEditorReady] = useState(false);
@@ -131,11 +160,15 @@ export const useEditor = <T = IEditorInstance>(type: 'single' | 'diff', props: I
   const editorRef = useRef<IEditorInstance>();
   const containerRef = useRef<HTMLDivElement>();
   const typeRef = useRef(type);
-  const editorDidMountRef = useRef<ISingleMonacoEditorProps['editorDidMount']>();
-  const editorWillMountRef = useRef<ISingleMonacoEditorProps['editorWillMount']>();
+  const editorDidMountRef =
+    useRef<ISingleMonacoEditorProps['editorDidMount']>();
+  const editorWillMountRef =
+    useRef<ISingleMonacoEditorProps['editorWillMount']>();
 
   const decomposeRef = useRef(false);
-  const viewStatusRef = useRef<Map<any, oEditor.ICodeEditorViewState>>(new Map());
+  const viewStatusRef = useRef<Map<any, oEditor.ICodeEditorViewState>>(
+    new Map()
+  );
 
   const enhancersRef = useRef<any>({});
 
@@ -146,7 +179,6 @@ export const useEditor = <T = IEditorInstance>(type: 'single' | 'diff', props: I
   useEffect(() => {
     editorDidMountRef.current = editorDidMount;
   }, [editorDidMount]);
-
 
   useEffect(() => {
     editorWillMountRef.current = editorWillMount;
@@ -171,7 +203,10 @@ export const useEditor = <T = IEditorInstance>(type: 'single' | 'diff', props: I
       .then((monaco: Monaco) => {
         // 兼容旧版本 monaco-editor 写死 MonacoEnvironment 的问题
         (window as any).MonacoEnvironment = undefined;
-        if (typeof (window as any).define === 'function' && (window as any).define.amd) {
+        if (
+          typeof (window as any).define === 'function' &&
+          (window as any).define.amd
+        ) {
           // make monaco-editor's loader work with webpack's umd loader
           // @see https://github.com/microsoft/monaco-editor/issues/2283
           delete (window as any).define.amd;
@@ -180,47 +215,61 @@ export const useEditor = <T = IEditorInstance>(type: 'single' | 'diff', props: I
         monacoRef.current = monaco;
         try {
           editorWillMountRef.current?.(monaco);
-        } catch (err) { }
+        } catch (err) {}
 
         if (!containerRef.current) {
           return;
         }
-        let editor: oEditor.IStandaloneCodeEditor | oEditor.IStandaloneDiffEditor;
+        let editor:
+          | oEditor.IStandaloneCodeEditor
+          | oEditor.IStandaloneDiffEditor;
         if (typeRef.current === 'single') {
           const model = getOrCreateModel(
             monaco,
             valueRef.current ?? defaultValueRef.current ?? '',
             languageRef.current,
-            pathRef.current,
+            pathRef.current
           );
-          editor = monaco.editor.create(containerRef.current, {
-            automaticLayout: true,
-            ...INITIAL_OPTIONS,
-            ...optionRef.current,
-          }, overrideServices);
+          editor = monaco.editor.create(
+            containerRef.current,
+            {
+              automaticLayout: true,
+              ...INITIAL_OPTIONS,
+              ...optionRef.current,
+            },
+            overrideServices
+          );
           editor.setModel(model);
         } else {
-          const originalModel = monaco
-            .editor
-            .createModel(valueRef.current, languageRef.current);
+          const originalModel = monaco.editor.createModel(
+            valueRef.current,
+            languageRef.current
+          );
 
-          const modifiedModel = monaco
-            .editor
-            .createModel(valueRef.current, languageRef.current);
+          const modifiedModel = monaco.editor.createModel(
+            valueRef.current,
+            languageRef.current
+          );
 
-          editor = monaco.editor.createDiffEditor(containerRef.current, {
-            automaticLayout: true,
-            ...DIFF_EDITOR_INITIAL_OPTIONS,
-            ...optionRef.current,
-          }, overrideServices);
+          editor = monaco.editor.createDiffEditor(
+            containerRef.current,
+            {
+              automaticLayout: true,
+              ...DIFF_EDITOR_INITIAL_OPTIONS,
+              ...optionRef.current,
+            },
+            overrideServices
+          );
 
           editor.setModel({ original: originalModel, modified: modifiedModel });
         }
         editorRef.current = editor;
-        enhancersRef.current.enhancers?.forEach((en: any) => en(monaco, editor as any));
+        enhancersRef.current.enhancers?.forEach((en: any) =>
+          en(monaco, editor as any)
+        );
         try {
           editorDidMountRef.current?.(monaco, editor);
-        } catch (err) { }
+        } catch (err) {}
         !decomposeRef.current && setIsEditorReady(true);
       })
       .catch((err: unknown) => {
@@ -246,9 +295,12 @@ export const useEditor = <T = IEditorInstance>(type: 'single' | 'diff', props: I
       return;
     }
 
-    const editor = type === 'diff'
-      ? (editorRef.current as oEditor.IStandaloneDiffEditor).getModifiedEditor()
-      : editorRef.current as oEditor.IStandaloneCodeEditor;
+    const editor =
+      type === 'diff'
+        ? (
+            editorRef.current as oEditor.IStandaloneDiffEditor
+          ).getModifiedEditor()
+        : (editorRef.current as oEditor.IStandaloneCodeEditor);
     editor?.onDidFocusEditorText(() => {
       !decomposeRef.current && setFocused(true);
     });
@@ -274,19 +326,24 @@ export const useEditor = <T = IEditorInstance>(type: 'single' | 'diff', props: I
       return;
     }
 
-    const editor = type === 'diff'
-      ? (editorRef.current as oEditor.IStandaloneDiffEditor).getModifiedEditor()
-      : editorRef.current as oEditor.IStandaloneCodeEditor;
+    const editor =
+      type === 'diff'
+        ? (
+            editorRef.current as oEditor.IStandaloneDiffEditor
+          ).getModifiedEditor()
+        : (editorRef.current as oEditor.IStandaloneCodeEditor);
 
     const nextValue = value ?? defaultValueRef.current ?? '';
     if (editor?.getOption?.(monacoRef.current?.editor.EditorOption.readOnly)) {
       editor?.setValue(nextValue);
     } else if (value !== editor?.getValue()) {
-      editor?.executeEdits('', [{
-        range: editor?.getModel().getFullModelRange(),
-        text: nextValue,
-        forceMoveMarkers: true,
-      }]);
+      editor?.executeEdits('', [
+        {
+          range: editor?.getModel().getFullModelRange(),
+          text: nextValue,
+          forceMoveMarkers: true,
+        },
+      ]);
 
       editor?.pushUndoStop();
     }
@@ -310,15 +367,20 @@ export const useEditor = <T = IEditorInstance>(type: 'single' | 'diff', props: I
       monacoRef.current,
       valueRef.current ?? defaultValueRef.current,
       languageRef.current,
-      path,
+      path
     );
 
     const editor = editorRef.current as oEditor.IStandaloneCodeEditor;
-    if (valueRef.current !== null && valueRef.current !== undefined && model.getValue() !== valueRef.current) {
+    if (
+      valueRef.current !== null &&
+      valueRef.current !== undefined &&
+      model.getValue() !== valueRef.current
+    ) {
       model.setValue(valueRef.current);
     }
     if (model !== editorRef.current.getModel()) {
-      saveViewState && viewStatusRef.current.set(previousPath, editor.saveViewState());
+      saveViewState &&
+        viewStatusRef.current.set(previousPath, editor.saveViewState());
       editor.setModel(model);
       saveViewState && editor.restoreViewState(viewStatusRef.current.get(path));
     }
@@ -336,19 +398,24 @@ export const useEditor = <T = IEditorInstance>(type: 'single' | 'diff', props: I
   } as const;
 };
 
-function getOrCreateModel(monaco: Monaco, value?: string, language?: string, path?: string) {
+function getOrCreateModel(
+  monaco: Monaco,
+  value?: string,
+  language?: string,
+  path?: string
+) {
   if (path) {
-    const prevModel = monaco
-      .editor
-      .getModel(monaco.Uri.parse(path));
+    const prevModel = monaco.editor.getModel(monaco.Uri.parse(path));
     if (prevModel) {
       return prevModel;
     }
   }
 
-  return monaco
-    .editor
-    .createModel(value, language, path && monaco.Uri.parse(path));
+  return monaco.editor.createModel(
+    value,
+    language,
+    path && monaco.Uri.parse(path)
+  );
 }
 
 function usePrevious<T>(value: T) {
@@ -358,3 +425,5 @@ function usePrevious<T>(value: T) {
   }, [value]);
   return ref.current;
 }
+
+export function noop() {}

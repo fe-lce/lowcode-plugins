@@ -3,6 +3,7 @@ import { INITIAL_OPTIONS, noop } from './helper';
 
 export * from './monaco';
 export * from './controller';
+export * from './helper';
 
 export const SingleMonacoEditorComponent = Object.assign(SingleMonacoEditor, {
   displayName: 'SingleMonacoEditor',

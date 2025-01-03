@@ -1,30 +1,32 @@
-import * as React from 'react';
-import {
-  useState,
-  useRef,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-} from 'react';
-import MonacoEditor from '@felce/lowcode-plugin-base-monaco-editor';
-
-import { Dialog, Message, Button } from '@alifd/next';
+import { Button, Dialog, Message } from '@alifd/next';
+import MonacoEditor, {
+  IEditorInstance,
+} from '@felce/lowcode-plugin-base-monaco-editor';
 import {
   IPublicEnumTransformStage,
   IPublicModelPluginContext,
 } from '@felce/lowcode-types';
-import { IEditorInstance } from '@felce/lowcode-plugin-base-monaco-editor/lib/helper';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 
 interface PluginCodeDiffProps {
+  intlCtx: any;
   pluginContext: IPublicModelPluginContext;
   // 是否显示项目级 schema
   showProjectSchema: boolean;
 }
 
 export default function PluginSchema({
+  intlCtx,
   pluginContext,
   showProjectSchema = false,
 }: PluginCodeDiffProps) {
+  const { intl } = intlCtx;
   const { project, skeleton } = pluginContext;
 
   const [editorSize, setEditorSize] = useState({ width: 0, height: 0 });
@@ -71,7 +73,8 @@ export default function PluginSchema({
       onOk: () => {
         let json;
         try {
-          json = JSON.parse(monacoEditorRef.current?.getValue() ?? schemaValue);
+          const str = (monacoEditorRef.current as any)?.getValue();
+          json = JSON.parse(str ?? schemaValue);
         } catch (err) {
           Message.error(
             'Cannot save schema. Schema Parse Error.' + err.message
@@ -100,7 +103,7 @@ export default function PluginSchema({
         onClick={onSave}
         style={{ position: 'absolute', right: 68, zIndex: 100, top: -38 }}
       >
-        {pluginContext.intl('Save Schema')}
+        {intl('Save Schema')}
       </Button>
       <MonacoEditor
         height={editorSize.height}

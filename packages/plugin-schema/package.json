@@ -1,40 +1,46 @@
 {
   "name": "@felce/lowcode-plugin-schema",
   "author": "alvarto",
-  "version": "1.1.0",
+  "version": "1.2.0-beta.1",
   "description": "Show schema in lowcode editor",
   "files": [
-    "es",
-    "lib"
+    "dist"
   ],
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "types": "lib/index.d.ts",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
   "README": "README.md",
   "scripts": {
-    "start": "build-scripts start",
-    "build": "build-scripts build",
-    "prepublishOnly": "npm run build"
+    "start": "vite",
+    "build": "vite build",
+    "prepublishOnly": "pnpm run build"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "main": "dist/index.es.js",
+    "module": "dist/index.umd.js",
+    "types": "dist/index.d.ts",
+    "style": "dist/index.css",
+    "exports": {
+      ".": {
+        "import": "./dist/index.es.js",
+        "require": "./dist/index.umd.js",
+        "style": "./dist/index.css"
+      }
+    }
   },
   "dependencies": {
-    "@alifd/next": "^1.25.13",
+    "@alifd/next": "^1.27.30",
     "@felce/lowcode-plugin-base-monaco-editor": "workspace:^",
-    "classnames": "^2.3.1",
-    "lodash": "^4.17.21",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "classnames": "^2.5.1",
+    "react": "^18.3.1"
   },
   "devDependencies": {
-    "@alib/build-scripts": "^0.1.32",
-    "@alifd/theme-lowcode-light": "^0.2.1",
-    "@alilc/build-plugin-alt": "^1.0.0",
-    "@felce/lowcode-types": "^1.1.2",
-    "@types/react": "^18",
-    "build-plugin-fusion": "^0.1.19"
+    "vite": "^6.0.6",
+    "@vitejs/plugin-react-swc": "3.7.1",
+    "vite-plugin-dts": "^4.3.0",
+    "@felce/lowcode-types": "^1.5.0-beta.3",
+    "@types/react": "^18.3.1"
   },
   "license": "MIT",
   "repository": {

@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite';
-import React from '@vitejs/plugin-react';
+import React from '@vitejs/plugin-react-swc';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({
-  plugins: [React({ jsxRuntime: 'classic' }), dts()],
+  plugins: [React({}), dts()],
   build: {
     lib: {
       entry: 'src/index.ts',

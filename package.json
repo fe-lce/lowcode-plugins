@@ -43,7 +43,8 @@
     "f2elint": "^4.9.0",
     "husky": "^9.1.7",
     "lerna": "^4.0.0",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "vite-plugin-external": "^4.3.1"
   },
   "engines": {
     "node": ">=18"

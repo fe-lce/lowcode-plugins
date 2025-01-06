@@ -1,9 +1,22 @@
 import { defineConfig } from 'vite';
 import React from '@vitejs/plugin-react-swc';
 import dts from 'vite-plugin-dts';
+import external from 'vite-plugin-external';
 
 export default defineConfig({
-  plugins: [React({}), dts()],
+  plugins: [
+    external({
+      externals: {
+        react: 'React',
+      },
+    }),
+    React({}),
+    dts(),
+  ],
+  server: {
+    port: 4173,
+    hmr: false,
+  },
   build: {
     lib: {
       entry: 'src/index.ts',

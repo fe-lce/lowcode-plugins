@@ -30,7 +30,7 @@ const plugin = (ctx: IPublicModelPluginContext, options: any) => {
             content: PluginSchema,
             type: 'Panel',
             name: 'LowcodePluginSchema',
-            props: {
+            contentProps: {
               intlCtx,
               pluginContext: ctx,
               showProjectSchema: isProjectSchema,

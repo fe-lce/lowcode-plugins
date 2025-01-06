@@ -5,11 +5,11 @@ import external from 'vite-plugin-external';
 
 export default defineConfig({
   plugins: [
-    external({
-      externals: {
-        react: 'React',
-      },
-    }),
+    // external({
+    //   externals: {
+    //     react: 'React',
+    //   },
+    // }),
     React({}),
     dts(),
   ],

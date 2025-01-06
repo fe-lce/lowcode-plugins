@@ -1,7 +1,7 @@
 {
   "name": "@felce/lowcode-plugin-schema",
   "author": "alvarto",
-  "version": "1.2.0-beta.1",
+  "version": "1.2.0-beta.2",
   "description": "Show schema in lowcode editor",
   "files": [
     "dist"

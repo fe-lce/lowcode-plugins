@@ -1,7 +1,7 @@
 {
   "name": "@felce/lowcode-plugin-schema",
   "author": "alvarto",
-  "version": "1.2.0-beta.2",
+  "version": "1.2.0-beta.3",
   "description": "Show schema in lowcode editor",
   "files": [
     "dist"
@@ -18,8 +18,8 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public",
-    "main": "dist/index.es.js",
-    "module": "dist/index.umd.js",
+    "main": "dist/index.umd.js",
+    "module": "dist/index.es.js",
     "types": "dist/index.d.ts",
     "style": "dist/index.css",
     "exports": {
@@ -40,7 +40,7 @@
     "vite": "^6.0.6",
     "@vitejs/plugin-react-swc": "3.7.1",
     "vite-plugin-dts": "^4.3.0",
-    "@felce/lowcode-types": "^1.5.0-beta.3",
+    "@felce/lowcode-types": "^1.5.0-beta.4",
     "@types/react": "^18.3.1"
   },
   "license": "MIT",

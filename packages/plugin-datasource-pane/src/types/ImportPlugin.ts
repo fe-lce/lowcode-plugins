@@ -1,4 +1,4 @@
-import { RuntimeDataSourceConfig as DataSourceConfig } from '@alilc/lowcode-datasource-types';
+import type { RuntimeDataSourceConfig as DataSourceConfig } from '@alilc/lowcode-datasource-types';
 import { DataSourceType } from './DataSourceType';
 
 // 导入插件
@@ -9,7 +9,8 @@ export interface DataSourcePaneImportPlugin {
   componentProps?: DataSourcePaneImportPluginCustomProps;
 }
 
-export interface DataSourcePaneImportPluginCustomProps extends DataSourcePaneImportPluginComponentProps {
+export interface DataSourcePaneImportPluginCustomProps
+  extends DataSourcePaneImportPluginComponentProps {
   [customPropName: string]: any;
 }
 

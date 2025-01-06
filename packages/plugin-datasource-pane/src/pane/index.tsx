@@ -14,7 +14,7 @@ import { DataSourcePane } from './DataSourcePane';
 import { DataSourceFilter } from '../components/DataSourceFilter';
 import { DataSourceList } from '../components/DataSourceList';
 import { DroppableDataSourceListItem } from '../components/DataSourceListItem';
-import {
+import type {
   DataSourcePaneImportPlugin,
   DataSourceType,
   DataSourceConfig,

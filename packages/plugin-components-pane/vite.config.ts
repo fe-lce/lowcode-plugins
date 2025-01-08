@@ -30,7 +30,7 @@ export default defineConfig({
       output: {
         exports: 'named',
       },
-      external: ['react', 'react-dom'],
+      external: ['react', '@alifd/next', '@felce/lowcode-types', '@felce/lowcode-engine'],
     },
   },
   css: {

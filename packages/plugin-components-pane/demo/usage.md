@@ -17,8 +17,8 @@ const packages = [
     package: 'polyfill',
     urls: ['//g.alicdn.com/platform/c/react15-polyfill/0.0.1/dist/index.js'],
   },
-  { package: 'react', version: '16.5.2', urls: null, library: 'React' },
-  { package: 'react-dom', version: '16.12.0', urls: null, library: 'ReactDOM' },
+  { package: 'react', version: '18.3.1', urls: null, library: 'React' },
+  { package: 'react-dom', version: '18.3.1', urls: null, library: 'ReactDOM' },
   { package: 'prop-types', version: '15.6.2', urls: null, library: 'PropTypes' },
 ];
 

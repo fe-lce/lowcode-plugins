@@ -1,6 +1,6 @@
 {
   "name": "@felce/lowcode-plugin-components-pane",
-  "version": "2.1.0-beta.2",
+  "version": "2.1.0-beta.4",
   "description": "低代码组件面板",
   "files": [
     "dist"
@@ -14,7 +14,15 @@
     "build": "vite build",
     "f2elint-scan": "f2elint scan",
     "f2elint-fix": "f2elint fix",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "pub": "npm version patch && pnpm publish",
+    "pub:major": "npm version major && pnpm publish",
+    "pub:minor": "npm version minor && pnpm publish",
+    "pub:patch": "npm version patch && pnpm publish",
+    "pub:premajor": "npm version premajor --preid beta && pnpm publish --tag beta",
+    "pub:preminor": "npm version preminor --preid beta && pnpm publish --tag beta",
+    "pub:prepatch": "npm version prepatch --preid beta && pnpm publish --tag beta",
+    "pub:prerelease": "npm version prerelease --preid beta && pnpm publish --tag beta"
   },
   "keywords": [
     "lowcode",
@@ -31,17 +39,16 @@
   ],
   "license": "ISC",
   "dependencies": {
+    "@alifd/next": "^1.27.30",
     "@felce/lowcode-types": "^1.5.0-beta.4",
+    "@felce/lowcode-engine": "^1.5.0-beta.4",
     "classnames": "^2.5.1",
     "lodash.debounce": "^4.0.8",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "moment": "^2.29.1"
   },
   "devDependencies": {
-    "@alifd/next": "^1.27.30",
     "@types/react": "^18.3.1",
-    "@types/react-dom": "^18.3.1",
     "eventemitter3": "^4.0.7",
     "f2elint": "^1.2.0"
   },

@@ -1,25 +1,24 @@
-import React from 'react';
 import { Search } from '@alifd/next';
+import { common, event, material, project } from '@felce/lowcode-engine';
 import { PluginProps } from '@felce/lowcode-types';
 import cls from 'classnames/bind';
 import debounce from 'lodash.debounce';
-import style from './index.module.scss';
+import React from 'react';
 import IconOfPane from '../Icon';
 import Category from '../components/Category';
-import List from '../components/List';
 import Component from '../components/Component';
+import List from '../components/List';
 import Tab from '../components/Tab';
 import ComponentManager from '../store';
 import transform, {
-  getTextReader,
-  SortedGroups,
-  Text,
-  StandardComponentMeta,
-  SnippetMeta,
   createI18n,
+  getTextReader,
+  SnippetMeta,
+  SortedGroups,
+  StandardComponentMeta,
+  Text,
 } from '../utils/transform';
-
-const { material, common, project, event } = window.AliLowCodeEngine || {};
+import style from './index.module.scss';
 
 const isNewEngineVersion = !!material;
 

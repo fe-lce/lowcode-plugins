@@ -29,8 +29,11 @@ export default defineConfig({
     rollupOptions: {
       output: {
         exports: 'named',
+        globals: {
+          react: 'React',
+        },
       },
-      external: [],
+      external: ['react'],
     },
   },
 });

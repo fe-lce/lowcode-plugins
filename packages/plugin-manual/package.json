@@ -1,7 +1,7 @@
 {
   "name": "@felce/lowcode-plugin-manual",
   "author": "humphry.huang9@gmail.com",
-  "version": "1.1.0-beta.2",
+  "version": "1.1.0",
   "description": "低代码产品使用手册",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
@@ -14,8 +14,14 @@
     "start": "vite",
     "build": "vite build",
     "prepublishOnly": "pnpm run build",
-    "beta": "pnpm publish --tag beta",
-    "pub": "pnpm publish"
+    "pub": "npm version patch && pnpm publish",
+    "pub:major": "npm version major && pnpm publish",
+    "pub:minor": "npm version minor && pnpm publish",
+    "pub:patch": "npm version patch && pnpm publish",
+    "pub:premajor": "npm version premajor --preid beta && pnpm publish --tag beta",
+    "pub:preminor": "npm version preminor --preid beta && pnpm publish --tag beta",
+    "pub:prepatch": "npm version prepatch --preid beta && pnpm publish --tag beta",
+    "pub:prerelease": "npm version prerelease --preid beta && pnpm publish --tag beta"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -26,7 +32,6 @@
   },
   "peerDependencies": {},
   "devDependencies": {
-    "@felce/lowcode-engine": "^1.4.0-beta.4",
     "@felce/lowcode-types": "^1.5.0-beta.4",
     "@types/react": "^18.3.1",
     "vite": "^6.0.6",

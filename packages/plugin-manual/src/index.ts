@@ -15,10 +15,7 @@ const PluginManual = (ctx: IPublicModelPluginContext) => {
           description: '如何使用',
           onClick() {
             window
-              .open(
-                'https://lowcode-engine.cn/site/docs/demoUsage/intro',
-                '_blank'
-              )
+              .open('https://felce.cn/docs/demoUsage/intro', '_blank')
               .focus();
           },
         },

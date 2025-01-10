@@ -1,3 +1,7 @@
 {
-  "Save Schema": "Save Schema"
+  "Save Schema": "Save Schema",
+  "Save Tip": "Are you 100% sure? Lowcode editor may crash",
+  "Schema Saved": "Schema Saved!",
+  "ok": "ok",
+  "cancel": "cancel"
 }

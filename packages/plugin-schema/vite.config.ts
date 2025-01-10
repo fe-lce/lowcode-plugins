@@ -29,8 +29,16 @@ export default defineConfig({
     rollupOptions: {
       output: {
         exports: 'named',
+        globals: {
+          react: 'React',
+          '@alifd/next': 'Next',
+        },
       },
-      external: [],
+      external: [
+        'react',
+        '@alifd/next',
+        '@felce/lowcode-plugin-base-monaco-editor',
+      ],
     },
   },
 });

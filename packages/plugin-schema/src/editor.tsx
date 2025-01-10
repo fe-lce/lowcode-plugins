@@ -68,8 +68,8 @@ export default function PluginSchema({
 
   const onSave = () => {
     Dialog.alert({
-      content: 'Are you 100% sure? Lowcode editor may crash.',
-      footerActions: ['cancel', 'ok'],
+      content: intl('Save Tip'),
+      footerActions: [intl('cancel'), intl('ok')],
       onOk: () => {
         let json;
         try {
@@ -91,7 +91,7 @@ export default function PluginSchema({
             componentsTree: [json],
           });
         }
-        Message.success('Schema Saved!');
+        Message.success(intl('Schema Saved'));
         skeleton.hidePanel('LowcodePluginAliLowcodePluginSchema');
       },
     });

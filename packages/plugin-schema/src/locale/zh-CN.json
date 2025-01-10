@@ -1,3 +1,7 @@
 {
-  "Save Schema": "保存 Schema"
+  "Save Schema": "保存 Schema",
+  "Save Tip": "您确定吗？低代码编辑器可能会崩溃！",
+  "Schema Saved": "Schema 已保存！",
+  "ok": "确定",
+  "cancel": "取消"
 }

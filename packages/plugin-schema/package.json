@@ -1,7 +1,7 @@
 {
   "name": "@felce/lowcode-plugin-schema",
   "author": "alvarto",
-  "version": "1.2.0-beta.3",
+  "version": "1.2.0",
   "description": "Show schema in lowcode editor",
   "files": [
     "dist"
@@ -13,7 +13,15 @@
     "start": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "pub": "npm version patch && pnpm publish",
+    "pub:major": "npm version major && pnpm publish",
+    "pub:minor": "npm version minor && pnpm publish",
+    "pub:patch": "npm version patch && pnpm publish",
+    "pub:premajor": "npm version premajor --preid beta && pnpm publish --tag beta",
+    "pub:preminor": "npm version preminor --preid beta && pnpm publish --tag beta",
+    "pub:prepatch": "npm version prepatch --preid beta && pnpm publish --tag beta",
+    "pub:prerelease": "npm version prerelease --preid beta && pnpm publish --tag beta"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

@@ -69,7 +69,7 @@ export default function PluginSchema({
   const onSave = () => {
     Dialog.alert({
       content: intl('Save Tip'),
-      footerActions: [intl('cancel'), intl('ok')],
+      footerActions: ['cancel', 'ok'],
       onOk: () => {
         let json;
         try {

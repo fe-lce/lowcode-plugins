@@ -1,14 +1,14 @@
-import React from 'react';
 import { NumberPicker, Icon } from '@alifd/next';
+import React from 'react';
 import { IPublicModelPluginContext } from '@felce/lowcode-types';
 
-import './index.scss';
-
-const devices = [{ key: 'default' }, { key: 'tablet' }, { key: 'phone' }];
+import './pane.less';
 
 const CustomIcon = Icon.createFromIconfontCN({
   scriptUrl: 'https://at.alicdn.com/t/font_2896595_33xhsbg9ux5.js',
 });
+
+const devices = [{ key: 'default' }, { key: 'tablet' }, { key: 'phone' }];
 
 export class SimulatorResizePane extends React.Component<{
   pluginContext: IPublicModelPluginContext;
@@ -124,33 +124,3 @@ export class SimulatorResizePane extends React.Component<{
     );
   }
 }
-
-const plugin = (ctx: IPublicModelPluginContext) => {
-  const SimulatorResizePaneRef = React.createRef<SimulatorResizePane>();
-
-  return {
-    // 插件的初始化函数，在引擎初始化之后会立刻调用
-    init() {
-      // 往引擎增加工具条
-      ctx.skeleton.add({
-        area: 'topArea',
-        name: 'SimulatorResizePane',
-        type: 'Widget',
-        props: {
-          description: '切换画布尺寸',
-          align: 'center',
-        },
-        content: (
-          <SimulatorResizePane
-            ref={SimulatorResizePaneRef}
-            pluginContext={ctx}
-          />
-        ),
-      });
-    },
-  };
-};
-
-plugin.pluginName = 'SimulatorResizePane';
-
-export default plugin;

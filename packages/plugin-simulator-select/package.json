@@ -1,29 +1,29 @@
 {
   "name": "@felce/lowcode-plugin-simulator-select",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "画布切换",
-  "main": "lib/index.js",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "start": "build-scripts start --config build.js",
-    "build": "build-scripts build --skip-demo --config build.js",
-    "prepublishOnly": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "vite",
+    "build": "vite build",
+    "prepublishOnly": "pnpm run build"
   },
   "keywords": [
     "lowcode",
     "simulator"
   ],
   "dependencies": {
+    "react": "^18.3.1",
     "@alifd/next": "^1.25.0"
   },
   "devDependencies": {
-    "@alib/build-scripts": "^0.1.18",
-    "@alilc/build-plugin-alt": "^1.2.2",
-    "@felce/lowcode-engine": "^1.0.0",
-    "@types/react": "^18",
-    "build-plugin-component": "^1.1.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@felce/lowcode-engine": "latest",
+    "@types/react": "^18.3.1",
+    "vite": "^6.0.6",
+    "@vitejs/plugin-react-swc": "3.7.1",
+    "vite-plugin-dts": "^4.3.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

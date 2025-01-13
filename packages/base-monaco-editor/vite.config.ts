@@ -1,10 +1,12 @@
 import { defineConfig } from 'vite';
 import React from '@vitejs/plugin-react-swc';
 import dts from 'vite-plugin-dts';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
 export default defineConfig({
-  plugins: [React({}), dts()],
+  plugins: [React({}), dts(), libInjectCss()],
   build: {
+    cssCodeSplit: true,
     lib: {
       entry: 'src/index.ts',
       fileName(format, entryName) {
@@ -16,8 +18,13 @@ export default defineConfig({
     rollupOptions: {
       output: {
         exports: 'named',
+        globals: {
+          react: 'React',
+          lodash: '_',
+          'monaco-editor': 'MonacoEditor',
+        },
       },
-      external: [],
+      external: ['react', 'lodash', 'monaco-editor'],
     },
   },
 });

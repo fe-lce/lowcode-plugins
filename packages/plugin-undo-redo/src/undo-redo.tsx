@@ -1,13 +1,9 @@
-import React, { PureComponent } from 'react';
 import { project } from '@felce/lowcode-engine';
+import { IPublicTypeDisposable, PluginProps } from '@felce/lowcode-types';
+import { PureComponent } from 'react';
 import { Button, Icon } from '@alifd/next';
-import {
-  PluginProps,
-  IPublicTypeDisposable,
-  IPublicModelPluginContext,
-} from '@felce/lowcode-types';
 
-import './index.scss';
+import './undo-redo.less';
 
 export interface IProps extends PluginProps {
   logo?: string;
@@ -18,7 +14,7 @@ export interface IState {
   redoEnable: boolean;
 }
 
-class UndoRedo extends PureComponent<IProps, IState> {
+export class UndoRedo extends PureComponent<IProps, IState> {
   static displayName = 'LowcodeUndoRedo';
 
   private history: any;
@@ -92,30 +88,3 @@ class UndoRedo extends PureComponent<IProps, IState> {
     );
   }
 }
-
-const plugin = (ctx: IPublicModelPluginContext) => {
-  return {
-    // 插件名，注册环境下唯一
-    name: 'PluginUndoRedo',
-    // 依赖的插件（插件名数组）
-    dep: [],
-    // 插件的初始化函数，在引擎初始化之后会立刻调用
-    init() {
-      // 往引擎增加面板
-      ctx.skeleton.add({
-        area: 'topArea',
-        type: 'Widget',
-        name: 'undoRedo',
-        content: UndoRedo,
-        props: {
-          align: 'right',
-          width: 88,
-        },
-      });
-    },
-  };
-};
-
-plugin.pluginName = 'PluginUndoRedo';
-
-export default plugin;

@@ -1,36 +1,42 @@
 {
   "name": "@felce/lowcode-plugin-undo-redo",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "lowcode engine editor undo redo plugin",
   "files": [
-    "es",
-    "lib"
+    "dist"
   ],
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "start": "build-scripts start",
-    "build": "build-scripts build",
-    "prepublishOnly": "npm run build"
+    "start": "vite",
+    "build": "vite build",
+    "prepublishOnly": "npm run build",
+    "pub": "npm version patch && pnpm publish",
+    "pub:major": "npm version major && pnpm publish",
+    "pub:minor": "npm version minor && pnpm publish",
+    "pub:patch": "npm version patch && pnpm publish",
+    "pub:premajor": "npm version premajor --preid beta && pnpm publish --tag beta",
+    "pub:preminor": "npm version preminor --preid beta && pnpm publish --tag beta",
+    "pub:prepatch": "npm version prepatch --preid beta && pnpm publish --tag beta",
+    "pub:prerelease": "npm version prerelease --preid beta && pnpm publish --tag beta"
   },
   "keywords": [
     "lowcode",
-    "editor"
+    "editor",
+    "undo",
+    "redo"
   ],
   "dependencies": {
-    "@felce/lowcode-utils": "^1.0.0",
-    "@felce/lowcode-types": "^1.1.9",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@felce/lowcode-engine": "^1.5.0-beta.4",
+    "@felce/lowcode-types": "^1.5.0-beta.4",
+    "react": "^18.3.1"
   },
   "devDependencies": {
-    "@alib/build-scripts": "^0.1.3",
-    "@alilc/build-plugin-alt": "^1.0.1",
-    "@felce/lowcode-engine": "^1.0.0",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "build-plugin-fusion": "^0.1.22",
-    "build-plugin-moment-locales": "^0.1.0"
+    "@types/react": "^18.3.1",
+    "vite": "^6.0.6",
+    "@vitejs/plugin-react-swc": "3.7.1",
+    "vite-plugin-dts": "^4.3.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

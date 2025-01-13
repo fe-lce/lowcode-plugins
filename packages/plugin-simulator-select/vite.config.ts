@@ -24,9 +24,10 @@ export default defineConfig({
         exports: 'named',
         globals: {
           react: 'React',
+          '@alifd/next': 'Next',
         },
       },
-      external: ['react'],
+      external: ['react', '@alifd/next', '@felce/lowcode-types'],
     },
   },
 });

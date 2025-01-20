@@ -1,0 +1,55 @@
+{
+  "name": "@felce/lowcode-plugin-inject",
+  "author": "ens",
+  "version": "1.3.0-beta.2",
+  "description": "lowcode engine 低代码插件注入插件",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "README": "README.md",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "prepublishOnly": "pnpm run build",
+    "pub": "npm version patch && pnpm publish",
+    "pub:major": "npm version major && pnpm publish",
+    "pub:minor": "npm version minor && pnpm publish",
+    "pub:patch": "npm version patch && pnpm publish",
+    "pub:premajor": "npm version premajor --preid beta && pnpm publish --tag beta",
+    "pub:preminor": "npm version preminor --preid beta && pnpm publish --tag beta",
+    "pub:prepatch": "npm version prepatch --preid beta && pnpm publish --tag beta",
+    "pub:prerelease": "npm version prerelease --preid beta --no-git-tag-version && pnpm publish --tag beta"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alibaba/lowcode-plugins.git",
+    "directory": "packages/lowcode-plugin-inject"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "main": "dist/index.umd.js",
+    "module": "dist/index.es.js",
+    "types": "dist/index.d.ts",
+    "style": "dist/index.css"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "@alifd/next": "^1.27.30",
+    "@felce/lowcode-engine": "latest",
+    "@felce/lowcode-types": "latest",
+    "@felce/lowcode-utils": "latest",
+    "case": "^1.6.3",
+    "fetch-jsonp": "^1.2.1",
+    "query-string": "^9.1.0",
+    "events": "^3.3.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@recore/config": "^2.0.6",
+    "@types/react": "^18.3.1"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,44 @@
+{
+  "name": "@felce/lowcode-plugin-outline-pane",
+  "version": "1.5.0-beta.6",
+  "description": "Outline pane for Ali lowCode engine",
+  "files": [
+    "dist"
+  ],
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "@alifd/next": "^1.27.30",
+    "@felce/lowcode-types": "latest",
+    "@felce/lowcode-utils": "latest",
+    "classnames": "^2.5.1",
+    "react": "^18.3.1",
+    "ric-shim": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.68",
+    "@types/react": "^18.3.1",
+    "vite": "^6.0.6"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "main": "dist/index.umd.js",
+    "module": "dist/index.es.js",
+    "types": "dist/index.d.ts"
+  },
+  "repository": {
+    "type": "http",
+    "url": "https://github.com/fe-lce/lowcode-engine/tree/main/packages/plugin-outline-pane"
+  },
+  "gitHead": "af061dee75cb9dc19df29d63c34fffba252c9b8c",
+  "bugs": "https://github.com/fe-lce/lowcode-engine/issues",
+  "homepage": "https://github.com/fe-lce/lowcode-engine/#readme"
+}

@@ -1,15 +1,19 @@
-import { PureComponent } from 'react';
 import { common } from '@felce/lowcode-engine';
-import { IPublicModelPluginContext, PluginProps } from '@felce/lowcode-types';
-import { intl } from './locale';
-import { IconZh } from './icons/zh';
+import type { PluginProps, IPublicApiCommon } from '@felce/lowcode-types';
+import { PureComponent } from 'react';
 import { IconEn } from './icons/en';
+import { IconZh } from './icons/zh';
 import './index.less';
+import { intl } from './locale';
 
 const { editorCabin } = common;
 const { globalLocale, Tip } = editorCabin;
 
-class ZhEn extends PureComponent<PluginProps> {
+export default class ZhEn extends PureComponent<
+  PluginProps & {
+    common: IPublicApiCommon;
+  }
+> {
   static displayName = 'LowcodeZhEn';
 
   state = {
@@ -42,30 +46,3 @@ class ZhEn extends PureComponent<PluginProps> {
     );
   }
 }
-
-const plugin = (ctx: IPublicModelPluginContext) => {
-  return {
-    // 插件名，注册环境下唯一
-    name: 'PluginZhEn',
-    // 依赖的插件（插件名数组）
-    dep: [],
-    // 插件的初始化函数，在引擎初始化之后会立刻调用
-    init() {
-      // 往引擎增加面板
-      ctx.skeleton.add({
-        area: 'leftArea',
-        type: 'Widget',
-        name: 'zhEn',
-        content: ZhEn,
-        contentProps: {},
-        props: {
-          align: 'bottom',
-        },
-      });
-    },
-  };
-};
-
-plugin.pluginName = 'PluginZhEn';
-
-export default plugin;

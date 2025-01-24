@@ -3,9 +3,8 @@ import {
   FieldConfig,
 } from '@felce/lowcode-types';
 import { v4 as uuidv4 } from 'uuid';
-import { material } from '@felce/lowcode-engine';
 
-function addonCombine(metadata: TransformedComponentMetadata) {
+export function addonCombine(metadata: TransformedComponentMetadata) {
   const { componentName, configure = {} } = metadata;
 
   const isRoot: boolean =
@@ -72,18 +71,3 @@ function addonCombine(metadata: TransformedComponentMetadata) {
     configure,
   };
 }
-
-const SetRefPropPlugin = () => {
-  return {
-    init() {
-      material.registerMetadataTransducer(
-        addonCombine,
-        110,
-        'register-ref-prop'
-      );
-    },
-  };
-};
-
-SetRefPropPlugin.pluginName = 'SetRefPropPlugin';
-export default SetRefPropPlugin;

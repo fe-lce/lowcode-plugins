@@ -1,10 +1,10 @@
-import * as React from "react";
-import { plugins, setters } from "@felce/lowcode-engine";
+import * as React from 'react';
+import { plugins, setters } from '@felce/lowcode-engine';
 import {
   IPublicModelPluginContext,
   IPublicEnumPluginRegisterLevel,
   IPublicTypePlugin,
-} from "@felce/lowcode-types";
+} from '@felce/lowcode-types';
 import {
   getInjectedResource,
   injectAssets,
@@ -12,9 +12,9 @@ import {
   injectComponents,
   filterPackages,
   setInjectServerHost,
-} from "./utils";
-import { Notification } from "@alifd/next";
-import { AppInject } from "./appInject";
+} from './utils';
+import { Notification } from '@alifd/next';
+import { AppInject } from './appInject';
 
 let injectedPluginConfigMap = null;
 let injectedPlugins = [];
@@ -25,7 +25,7 @@ export async function getInjectedPlugin(
 ) {
   if (!injectedPluginConfigMap) {
     injectedPluginConfigMap = {};
-    injectedPlugins = await getInjectedResource("plugin");
+    injectedPlugins = await getInjectedResource('plugin');
     if (injectedPlugins && injectedPlugins.length > 0) {
       injectedPlugins.forEach((item: any) => {
         let pluginName = item.module?.pluginName;
@@ -90,7 +90,7 @@ const Inject = (ctx: IPublicModelPluginContext, options: IOptions = {}) => {
 
   return {
     // 插件名，注册环境下唯一
-    name: "LowcodePluginInjectAlt",
+    name: 'LowcodePluginInject',
     // 依赖的插件（插件名数组）
     dep: [],
     // 插件的初始化函数，在引擎初始化之后会立刻调用
@@ -111,13 +111,13 @@ const Inject = (ctx: IPublicModelPluginContext, options: IOptions = {}) => {
           }
         });
       }
-      const injectedSetters = await getInjectedResource("vs");
+      const injectedSetters = await getInjectedResource('vs');
       injectedSetters.forEach((item) => {
         setters.registerSetter(item.module.displayName, item.module);
       });
       if (injectedPlugins.length > 0 || injectedSetters.length > 0) {
         Notification.success({
-          title: "成功注入以下插件",
+          title: '成功注入以下插件',
           content: (
             <div>
               {injectedPlugins &&
@@ -140,18 +140,18 @@ const Inject = (ctx: IPublicModelPluginContext, options: IOptions = {}) => {
   };
 };
 
-Inject.pluginName = "LowcodePluginInjectAlt";
+Inject.pluginName = 'LowcodePluginInjectAlt';
 
 export default Inject;
 Inject.meta = {
   dependencies: [],
   preferenceDeclaration: {
-    title: "注入资源的主机地址",
+    title: '注入资源的主机地址',
     properties: [
       {
-        key: "injectServerHost",
-        type: "string",
-        description: "注入资源的主机地址",
+        key: 'injectServerHost',
+        type: 'string',
+        description: '注入资源的主机地址',
       },
     ],
   },

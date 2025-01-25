@@ -1,8 +1,13 @@
 import { IPublicModelPluginContext } from '@felce/lowcode-types';
 import ZhEn from './zh-en';
+import { enUS, zhCN } from './locale';
 import './index.less';
 
 const plugin = (ctx: IPublicModelPluginContext) => {
+  const intlCtx = ctx.common.utils.createIntl({
+    'en-US': enUS,
+    'zh-CN': zhCN,
+  });
   return {
     // 插件名，注册环境下唯一
     name: 'PluginZhEn',
@@ -17,10 +22,12 @@ const plugin = (ctx: IPublicModelPluginContext) => {
         name: 'zhEn',
         content: ZhEn,
         contentProps: {
+          intlCtx,
           common: ctx.common,
         },
         props: {
           align: 'bottom',
+          description: intlCtx.intl('To Locale'),
         },
       });
     },

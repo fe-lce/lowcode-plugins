@@ -1,26 +1,30 @@
-import { common } from '@felce/lowcode-engine';
 import type { PluginProps, IPublicApiCommon } from '@felce/lowcode-types';
 import { PureComponent } from 'react';
 import { IconEn } from './icons/en';
 import { IconZh } from './icons/zh';
 import './index.less';
-import { intl } from './locale';
 
 const { editorCabin } = common;
-const { globalLocale, Tip } = editorCabin;
+const { globalLocale } = editorCabin;
 
-export default class ZhEn extends PureComponent<
-  PluginProps & {
-    common: IPublicApiCommon;
-  }
-> {
+type IZhEnProps = PluginProps & {
+  common: IPublicApiCommon;
+};
+
+export default class ZhEn extends PureComponent<IZhEnProps> {
   static displayName = 'LowcodeZhEn';
 
   state = {
     locale: globalLocale.getLocale(),
   };
 
-  private dispose = globalLocale.onChangeLocale((locale) => {
+  constructor(props: IZhEnProps) {
+    super(props);
+
+    this.props.common;
+  }
+
+  private dispose = globalLocale.onChangeLocale((locale: string) => {
     this.setState({
       locale,
     });
@@ -41,7 +45,6 @@ export default class ZhEn extends PureComponent<
         }}
       >
         {isZh ? <IconEn size={20} /> : <IconZh size={20} />}
-        <Tip direction="right">{intl('To Locale')}</Tip>
       </div>
     );
   }

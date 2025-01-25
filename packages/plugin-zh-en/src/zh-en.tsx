@@ -4,8 +4,8 @@ import { IconEn } from './icons/en';
 import { IconZh } from './icons/zh';
 import './index.less';
 
-const { editorCabin } = common;
-const { globalLocale } = editorCabin;
+// const { editorCabin } = common;
+// const { globalLocale } = editorCabin;
 
 type IZhEnProps = PluginProps & {
   common: IPublicApiCommon;
@@ -15,24 +15,31 @@ export default class ZhEn extends PureComponent<IZhEnProps> {
   static displayName = 'LowcodeZhEn';
 
   state = {
-    locale: globalLocale.getLocale(),
+    locale: '',
   };
+
+  private globalLocale;
 
   constructor(props: IZhEnProps) {
     super(props);
+    this.globalLocale = (props.common.editorCabin as any).globalLocale;
 
-    this.props.common;
+    this.state.locale = this.globalLocale.getLocale();
+    this.globalLocale.onChangeLocale((locale: string) => {
+      this.setState({
+        locale,
+      });
+      window.location.reload();
+    });
   }
 
-  private dispose = globalLocale.onChangeLocale((locale: string) => {
-    this.setState({
-      locale,
-    });
-    window.location.reload();
-  });
+  changeHandle() {
+    const isZh = this.state.locale === 'zh-CN';
+    this.globalLocale.setLocale(isZh ? 'en-US' : 'zh-CN');
+  }
 
   componentWillUnmount() {
-    this.dispose();
+    // this.dispose();
   }
 
   render() {
@@ -41,7 +48,7 @@ export default class ZhEn extends PureComponent<IZhEnProps> {
       <div
         className="lowcode-plugin-zh-en"
         onClick={() => {
-          globalLocale.setLocale(isZh ? 'en-US' : 'zh-CN');
+          this.changeHandle();
         }}
       >
         {isZh ? <IconEn size={20} /> : <IconZh size={20} />}

@@ -1,6 +1,6 @@
 {
   "name": "@felce/lowcode-plugin-zh-en",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "lowcode engine editor zhong english plugin",
   "files": [
     "dist"

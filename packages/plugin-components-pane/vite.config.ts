@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import React from '@vitejs/plugin-react-swc';
 import dts from 'vite-plugin-dts';
 import external from 'vite-plugin-external';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
 export default defineConfig({
   plugins: [
@@ -12,10 +13,10 @@ export default defineConfig({
     // }),
     React({}),
     dts(),
+    libInjectCss(),
   ],
   server: {
     port: 4173,
-    hmr: false,
   },
   build: {
     lib: {

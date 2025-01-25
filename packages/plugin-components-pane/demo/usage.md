@@ -7,7 +7,7 @@ order: 1
 
 ```jsx
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
 import { Icon } from '@alifd/next';
 import ComponentPane, { PaneIcon } from '@felce/lowcode-plugin-components-pane';
 import './index.scss';
@@ -58,5 +58,7 @@ class App extends Component {
   }
 }
 
-ReactDOM.render(<App />, mountNode);
+const root = createRoot(document.getElementById('lce-container')!);
+
+root.render(<App />);
 ```

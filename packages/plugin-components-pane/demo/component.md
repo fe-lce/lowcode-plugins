@@ -7,6 +7,7 @@ order: 2
 
 ```jsx
 import React, { Component } from 'react';
+import {createRoot} from 'react-dom/client';
 import ComponentPane, { PaneIcon } from '@felce/lowcode-plugin-components-pane';
 import Editor from '../schema/editor';
 import mock from '../schema/mock.json';
@@ -26,5 +27,7 @@ class App extends Component {
   }
 }
 
-ReactDOM.render(<App />, mountNode);
+const root = createRoot(document.getElementById('lce-container')!);
+
+root.render(<App />);
 ```

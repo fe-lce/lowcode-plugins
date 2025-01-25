@@ -1,7 +1,7 @@
 {
   "name": "@felce/lowcode-plugin-manual",
-  "author": "humphry.huang9@gmail.com",
-  "version": "1.1.0",
+  "author": "",
+  "version": "1.1.1",
   "description": "低代码产品使用手册",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",

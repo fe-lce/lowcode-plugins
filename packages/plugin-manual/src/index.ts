@@ -1,7 +1,12 @@
 import { IPublicModelPluginContext } from '@felce/lowcode-types';
 import { IconQuestion } from './icon';
+import { enUS, zhCN } from './locale';
 
 const PluginManual = (ctx: IPublicModelPluginContext) => {
+  const intlCtx = ctx.common.utils.createIntl({
+    'en-US': enUS,
+    'zh-CN': zhCN,
+  });
   return {
     init() {
       // 往引擎增加面板
@@ -12,7 +17,7 @@ const PluginManual = (ctx: IPublicModelPluginContext) => {
         props: {
           align: 'bottom',
           icon: IconQuestion,
-          description: '如何使用',
+          description: intlCtx.intl('manual'),
           onClick() {
             window
               .open('https://felce.cn/docs/demoUsage/intro', '_blank')

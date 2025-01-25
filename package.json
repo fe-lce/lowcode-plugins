@@ -1,5 +1,6 @@
 {
   "private": true,
+  "name": "lowcode-plugins",
   "workspaces": {
     "packages": [
       "packages/*"
@@ -9,50 +10,16 @@
       "**/@alife/theme-lowcode-*"
     ]
   },
-  "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "dev": "npm run bootstrap && npm run build && cooking watch -c build/cooking.demo.js -p",
-    "build": "./scripts/build.sh",
-    "clean": "rm -rf ./packages/*/lib ./packages/*/es ./packages/*/dist ./packages/*/build",
-    "setup": "./scripts/setup.sh",
-    "setup:test": "./scripts/setup-for-test.sh",
-    "setup:skip-build": "./scripts/setup-skip-build.sh",
-    "start": "./scripts/start.sh",
-    "start:demo": "./scripts/start.sh @alilc/lowcode-demo",
-    "test": "lerna run test --stream",
-    "test:snapshot": "lerna run test:snapshot",
-    "watchdog:build": "node ./scripts/watchdog.js",
-    "f2elint:scan": "f2elint scan -q -i ./packages/*/src",
-    "f2elint:fix": "f2elint fix -i ./packages/*/src",
-    "release:beta": "lerna publish --canary --pre-dist-tag=beta --preid=beta --yes",
-    "release:rc": "lerna publish prerelease --pre-dist-tag=rc --preid=rc",
-    "release:next": "lerna publish prerelease --pre-dist-tag=next --preid=next",
-    "release:preminor": "lerna publish preminor --pre-dist-tag=next --preid=next",
-    "release:premajor": "lerna publish premajor --pre-dist-tag=next --preid=next",
-    "release": "lerna publish",
-    "release:minor": "lerna publish minor",
-    "release:major": "lerna publish major"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "f2elint commit-file-scan",
-      "commit-msg": "f2elint commit-msg-scan"
-    }
-  },
+  "scripts": {},
   "devDependencies": {
     "f2elint": "^4.9.0",
     "husky": "^9.1.7",
-    "lerna": "^4.0.0",
     "typescript": "^5.6.3",
-    "vite-plugin-external": "^4.3.1"
+    "vite-plugin-external": "^4.3.1",
+    "vite-plugin-lib-inject-css": "^2.2.1"
   },
   "engines": {
     "node": ">=18"
   },
-  "tnpm": {
-    "mode": "yarn",
-    "lockfile": "enable"
-  },
-  "repository": "https://github.com/fe-lce/lowcode-plugins.git",
-  "name": "lowcode-plugins"
+  "repository": "https://github.com/fe-lce/lowcode-plugins.git"
 }

@@ -12,10 +12,7 @@ import {
 } from '../../utils';
 
 import { FunctionEventParams } from '../../types';
-import {
-  IEditorInstance,
-  IMonacoInstance,
-} from '@felce/lowcode-plugin-base-monaco-editor/lib/helper';
+import { IEditorInstance } from '@felce/lowcode-plugin-base-monaco-editor';
 
 import './JsEditor.less';
 
@@ -57,7 +54,7 @@ export class JsEditor extends PureComponent<JsEditorProps, JsEditorState> {
     code: this.props.jsCode ?? defaultCode,
   };
 
-  monaco?: IMonacoInstance;
+  monaco?: Monaco;
   monacoEditor?: IEditorInstance;
   lastErrorDecoration: any;
 

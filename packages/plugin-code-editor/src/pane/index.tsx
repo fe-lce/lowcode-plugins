@@ -1,17 +1,14 @@
-import React, { useEffect, useState, useMemo, memo, useRef } from 'react';
 import { Dialog, Message } from '@alifd/next';
-
-import { JsEditor, CssEditor } from '../components';
-import { schema2JsCode, schema2CssCode } from '../utils';
-import { WORDS, TAB_KEY } from '../config';
 import { common } from '@felce/lowcode-engine';
-
-import { FunctionEventParams } from '../types';
-import { Project, Event, Skeleton } from '@felce/lowcode-shell';
-
-import '@felce/lowcode-plugin-base-monaco-editor/lib/style';
-import './index.less';
+import { Event, Project, Skeleton } from '@felce/lowcode-shell';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
+import { CssEditor, JsEditor } from '../components';
 import { SaveIcon } from '../components/SaveIcon';
+import { TAB_KEY, WORDS } from '../config';
+import { FunctionEventParams } from '../types';
+import { schema2CssCode, schema2JsCode } from '../utils';
+
+import './index.less';
 
 interface CodeEditorPaneProps {
   project: Project;

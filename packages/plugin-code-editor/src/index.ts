@@ -21,25 +21,26 @@ const plugin = (ctx: IPublicModelPluginContext) => {
         type: 'PanelDock',
         props: {
           icon,
-          description: '源码面板',
+          description: '源码面板1',
         },
         panelProps: {
           width: '600px',
-          title: '源码面板',
+          title: '源码面板1',
         },
-        content: (
-          <CodeEditorPane
-            event={ctx.event}
-            skeleton={ctx.skeleton}
-            project={ctx.project}
-          />
-        ),
+        content: CodeEditorPane,
+        contentProps: {
+          event: ctx.event,
+          skeleton: ctx.skeleton,
+          project: ctx.project,
+        },
       });
 
-      codeEditorDock && codeEditorDock.disable();
-      project.onSimulatorRendererReady(() => {
-        codeEditorDock.enable();
-      });
+      if (codeEditorDock) {
+        codeEditorDock.disable();
+        project.onSimulatorRendererReady(() => {
+          codeEditorDock.enable();
+        });
+      }
     },
   };
 };

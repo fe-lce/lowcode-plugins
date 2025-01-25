@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import MonacoEditor from '@felce/lowcode-plugin-base-monaco-editor';
 import { Tab } from '@alifd/next';
+import MonacoEditor from '@felce/lowcode-plugin-base-monaco-editor';
+import { PureComponent } from 'react';
 
-import { IEditorInstance } from '@felce/lowcode-plugin-base-monaco-editor/lib/helper';
+import { IEditorInstance } from '@felce/lowcode-plugin-base-monaco-editor';
 
 import { TAB_KEY } from '../../config';
 
-import './CssEditor.less';
 import { beautifyCSS } from '../../utils';
+import './CssEditor.less';
 
 export interface CssEditorProps {
   cssCode?: string;

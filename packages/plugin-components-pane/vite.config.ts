@@ -6,11 +6,13 @@ import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
 export default defineConfig({
   plugins: [
-    // external({
-    //   externals: {
-    //     react: 'React',
-    //   },
-    // }),
+    external({
+      development: {
+        externals: {
+          react: 'React',
+        },
+      },
+    }),
     React({}),
     dts(),
     libInjectCss(),
@@ -31,7 +33,7 @@ export default defineConfig({
       output: {
         exports: 'named',
       },
-      external: ['react', '@alifd/next', '@felce/lowcode-types', '@felce/lowcode-engine'],
+      external: ['react', '@alifd/next', '@felce/lowcode-types'],
     },
   },
   css: {

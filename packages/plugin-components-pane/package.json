@@ -1,6 +1,6 @@
 {
   "name": "@felce/lowcode-plugin-components-pane",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "低代码组件面板",
   "files": [
     "dist"
@@ -29,19 +29,10 @@
     "plugin",
     "components"
   ],
-  "authors": [
-    {
-      "name": "gray.wjf"
-    },
-    {
-      "name": "金禅"
-    }
-  ],
   "license": "ISC",
   "dependencies": {
     "@alifd/next": "^1.27.30",
-    "@felce/lowcode-types": "^1.5.0-beta.4",
-    "@felce/lowcode-engine": "^1.5.0-beta.4",
+    "@felce/lowcode-types": "latest",
     "classnames": "^2.5.1",
     "lodash.debounce": "^4.0.8",
     "react": "^18.3.1",

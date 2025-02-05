@@ -1,5 +1,4 @@
 import { Search } from '@alifd/next';
-import { common, event, material, project } from '@felce/lowcode-engine';
 import { PluginProps } from '@felce/lowcode-types';
 import cls from 'classnames/bind';
 import debounce from 'lodash.debounce';
@@ -19,8 +18,6 @@ import transform, {
   Text,
 } from '../utils/transform';
 import style from './index.module.scss';
-
-const isNewEngineVersion = !!material;
 
 const store = new ComponentManager();
 
@@ -110,26 +107,20 @@ export default class ComponentPane extends React.Component<ComponentPaneProps, C
   }
 
   componentDidMount() {
-    const { editor } = this.props;
+    const { editor, event, material } = this.props;
     if (!editor) {
       this.initComponentList();
       return;
     }
-    const assets = isNewEngineVersion ? material.getAssets() : editor.get('assets');
+    const assets = material.getAssets();
     if (assets) {
       this.initComponentList();
     } else {
       console.warn('[ComponentsPane]: assets not ready, wait for assets ready event.');
     }
 
-    if (isNewEngineVersion) {
-      event.on('trunk.change', this.initComponentList.bind(this));
-      material.onChangeAssets(this.initComponentList.bind(this));
-    } else {
-      editor.on('trunk.change', this.initComponentList.bind(this));
-      editor.once('editor.ready', this.initComponentList.bind(this));
-      editor.on('designer.incrementalAssetsReady', this.initComponentList.bind(this));
-    }
+    event.on('trunk.change', this.initComponentList.bind(this));
+    material.onChangeAssets(this.initComponentList.bind(this));
   }
 
   /**
@@ -137,8 +128,8 @@ export default class ComponentPane extends React.Component<ComponentPaneProps, C
    * TODO: 无副作用，可多次执行
    */
   initComponentList() {
-    const { editor } = this.props;
-    const rawData = isNewEngineVersion ? material.getAssets() : editor.get('assets');
+    const { material } = this.props;
+    const rawData = material.getAssets();
 
     const meta = transform(rawData, this.t);
 
@@ -170,10 +161,9 @@ export default class ComponentPane extends React.Component<ComponentPaneProps, C
       return null;
     }
 
-    const { editor } = this.props;
-    const designer = !isNewEngineVersion ? editor?.get('designer') : null;
-    const _dragon = isNewEngineVersion ? common.designerCabin.dragon : designer?.dragon;
-    if (!_dragon || (!isNewEngineVersion && !designer)) {
+    const { common, project } = this.props;
+    const _dragon = common.designerCabin.dragon;
+    if (!_dragon) {
       return;
     }
 
@@ -183,7 +173,7 @@ export default class ComponentPane extends React.Component<ComponentPaneProps, C
     shell.addEventListener('click', click);
 
     _dragon.from(shell, (e: Event) => {
-      const doc = isNewEngineVersion ? project.getCurrentDocument() : designer?.currentDocument;
+      const doc = project.getCurrentDocument();
       const id = getSnippetId(e.target);
       if (!doc || !id) {
         return false;

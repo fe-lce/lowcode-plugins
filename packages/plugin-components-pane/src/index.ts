@@ -9,19 +9,13 @@ const ComponentPanelPlugin = (ctx: IPublicModelPluginContext) => {
         area: 'leftArea',
         type: 'PanelDock',
         name: 'componentsPane',
-        content: [
-          {
-            name: 'componentsPane',
-            type: 'Panel',
-            contentProps: {
-              common,
-              event,
-              material,
-              project,
-            },
-            content: ComponentsPane,
-          },
-        ],
+        contentProps: {
+          common,
+          event,
+          material,
+          project,
+        },
+        content: ComponentsPane,
         props: {
           align: 'top',
           icon: 'zujianku',

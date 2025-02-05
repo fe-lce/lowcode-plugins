@@ -1,10 +1,13 @@
 import { IconOutline } from './icons/outline';
-import { IPublicModelPluginContext, IPublicModelDocumentModel } from '@felce/lowcode-types';
+import {
+  IPublicModelPluginContext,
+  IPublicModelDocumentModel,
+} from '@felce/lowcode-types';
 import { MasterPaneName, BackupPaneName } from './helper/consts';
 import { TreeMaster } from './controllers/tree-master';
 import { OutlinePaneContext } from './pane-context';
 
-export const OutlinePlugin = (ctx: IPublicModelPluginContext, options: any) => {
+const OutlinePlugin = (ctx: IPublicModelPluginContext, options: any) => {
   const { skeleton, config, canvas, project } = ctx;
 
   let isInFloatArea = true;
@@ -12,7 +15,9 @@ export const OutlinePlugin = (ctx: IPublicModelPluginContext, options: any) => {
     .getPreference()
     .contains('outline-pane-pinned-status-isFloat', 'skeleton');
   if (hasPreferenceForOutline) {
-    isInFloatArea = config.getPreference().get('outline-pane-pinned-status-isFloat', 'skeleton');
+    isInFloatArea = config
+      .getPreference()
+      .get('outline-pane-pinned-status-isFloat', 'skeleton');
   }
   const showingPanes = {
     masterPane: false,
@@ -71,7 +76,8 @@ export const OutlinePlugin = (ctx: IPublicModelPluginContext, options: any) => {
       // 处理 master pane 和 backup pane 切换
       const switchPanes = () => {
         const isDragging = canvas.dragon?.dragging;
-        const hasVisibleTreeBoard = showingPanes.backupPane || showingPanes.masterPane;
+        const hasVisibleTreeBoard =
+          showingPanes.backupPane || showingPanes.masterPane;
         const shouldShowBackupPane = isDragging && !hasVisibleTreeBoard;
 
         if (shouldShowBackupPane) {
@@ -139,3 +145,5 @@ OutlinePlugin.meta = {
   },
 };
 OutlinePlugin.pluginName = 'OutlinePlugin';
+
+export default OutlinePlugin;

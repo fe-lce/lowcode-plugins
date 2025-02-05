@@ -50,7 +50,6 @@ export default class TreeView extends PureComponent<{
   }
 
   private onClick = (e: ReactMouseEvent) => {
-    alert('ddddd');
     if (this.ignoreUpSelected) {
       this.boostEvent = undefined;
       return;

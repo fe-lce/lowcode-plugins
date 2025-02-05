@@ -7,12 +7,14 @@ import { libInjectCss } from 'vite-plugin-lib-inject-css';
 export default defineConfig(({ mode }) => {
   return {
     plugins: [
-      // external({
-      //   externals: {
-      //     react: 'window.React',
-      //     'react-dom': 'window.ReactDOM',
-      //   },
-      // }),
+      external({
+        development: {
+          externals: {
+            react: 'window.React',
+            'react-dom': 'window.ReactDOM',
+          },
+        },
+      }),
       react(),
       dts({
         entryRoot: 'src/',

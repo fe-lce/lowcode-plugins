@@ -338,8 +338,7 @@ export class PaneController
    */
   scrollToNode(treeNode: TreeNode, detail?: any, tryTimes = 0) {
     if (tryTimes < 1 && this.tryScrollAgain) {
-      // FIXME 这里调用会陷入循环调用，暂时取消
-      // cancelIdleCallback(this.tryScrollAgain);
+      cancelIdleCallback(this.tryScrollAgain);
       this.tryScrollAgain = null;
     }
     if (!this.bounds || !this.scroller || !this.scrollTarget) {

@@ -17,8 +17,8 @@ BTW. Style is seperate from index.js. Use `import '@felce/lowcode-plugin-base-mo
 
 ## API
 
-| prop | description | type annotation |
-| --------------- |------------------------- | ---------------- |
+| prop            | description                                                                                                                   | type annotation                                              |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | -------- |
 | value           | value, controlled                                                                                                             | `string`                                                     |
 | defaultValue    | defaultValue for creating model, uncontrolled                                                                                 | `string`                                                     |
 | language        | language of the editor                                                                                                        | `string`                                                     |
@@ -65,7 +65,7 @@ BTW. Style is seperate from index.js. Use `import '@felce/lowcode-plugin-base-mo
 
 ```jsx
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
 import SingleMonacoEditorComponent from '@felce/lowcode-plugin-base-monaco-editor';
 
 function App() {
@@ -122,7 +122,9 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, mountNode);
+const root = createRoot(document.getElementById('lce-container')!);
+
+root.render(<App />);
 ```
 
 ### Using controller

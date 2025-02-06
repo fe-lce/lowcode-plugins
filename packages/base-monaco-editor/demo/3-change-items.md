@@ -5,7 +5,7 @@ order: 3
 
 ```jsx
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
 import SingleMonacoEditorComponent from '@felce/lowcode-plugin-base-monaco-editor';
 
 function App() {
@@ -56,5 +56,7 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, mountNode);
+const root = createRoot(document.getElementById('lce-container')!);
+
+root.render(<App />);
 ```
